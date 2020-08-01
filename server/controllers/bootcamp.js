@@ -56,3 +56,29 @@ exports.getBootcampById = async (req, res, next) => {
     res.status(400).json(error);
   }
 };
+
+// @desc      UPDATE bootcamp by Id
+// @route     PUT /api/v1/bootcamps/:id
+// @access    Public
+
+exports.updateBootcampById = async (req, res, next) => {
+  try {
+    const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!bootcamp) {
+      return res
+        .status(404)
+        .json({ success: false });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: bootcamp,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
+  }
+};
