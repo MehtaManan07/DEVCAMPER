@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 const slugify = require('slugify');
-const geocoder = require("../utils/geocoder");
+// const geocoder = require("../utils/geocoder");
 
 const BootCampSchema = new schema({
   name: {
@@ -43,12 +43,12 @@ const BootCampSchema = new schema({
     // GeoJSON Point
     type: {
       type: String,
-      required: true,
       enum: ["Point"],
+      // required: true,
     },
     coordinates: {
       type: [Number],
-      required: true,
+      // required: true,
       index: "2dsphere",
     },
     formattedAddress: String,
