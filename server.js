@@ -7,6 +7,7 @@ const morgan = require("morgan");
 dotenv.config({ path: "./server/config/.env" });
 
 const connectDB = require("./server/config/db"); // load database
+const errorHandler = require("./server/middlewares/error"); // error handler import
 const app = express();
 
 //body-parser
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use("/api/v1/bootcamps", require("./server/routes/Bootcamps"));
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(
