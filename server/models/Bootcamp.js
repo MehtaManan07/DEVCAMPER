@@ -104,5 +104,9 @@ const BootCampSchema = new schema({
   },
 });
 
+BootCampSchema.pre("save", function() {
+  this.slug = slugify(this.name, {lower: true})
+})
+
 const Bootcamp = mongoose.model("BootCamp", BootCampSchema);
 module.exports = Bootcamp;

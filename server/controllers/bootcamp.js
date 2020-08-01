@@ -49,36 +49,36 @@ exports.getBootcampById = asyncHandler(async (req, res, next) => {
 // @access    Public
 
 exports.updateBootcampById = asyncHandler(async (req, res, next) => {
-    const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!bootcamp) {
-      return next(
-        new ErrorResponse(`Bootcamp not found with id ${req.params.id}`, 404)
-      );
-    }
+  const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  if (!bootcamp) {
+    return next(
+      new ErrorResponse(`Bootcamp not found with id ${req.params.id}`, 404)
+    );
+  }
 
-    res.status(200).json({
-      success: true,
-      data: bootcamp,
-    });
-})
+  res.status(200).json({
+    success: true,
+    data: bootcamp,
+  });
+});
 
 // @desc      Delete bootcamp by Id
 // @route     DELETE /api/v1/bootcamps/:id
 // @access    Public
 
-exports.deleteBootcampById = asyncHandler( async (req, res, next) => {
-    const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id);
-    if (!bootcamp) {
-      return next(
-        new ErrorResponse(`Bootcamp not found with id ${req.params.id}`, 404)
-      );
-    }
+exports.deleteBootcampById = asyncHandler(async (req, res, next) => {
+  const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id);
+  if (!bootcamp) {
+    return next(
+      new ErrorResponse(`Bootcamp not found with id ${req.params.id}`, 404)
+    );
+  }
 
-    res.status(200).json({
-      success: true,
-      data: bootcamp,
-    });
-})
+  res.status(200).json({
+    success: true,
+    data: bootcamp,
+  });
+});
