@@ -29,7 +29,7 @@ const NavbarComponent = () => {
   );
 
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+    <nav className="navbar navbar-expand-md navbar-dark bg-primary">
       <div className="container">
         <Link className="navbar-brand" to="/">
           <i className="fas fa-laptop-code"></i> DevCamper
