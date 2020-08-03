@@ -1,6 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getBootcampsInRadius } from "../../../redux/actions/Bootcamps";
 
 const LocationFilter = () => {
+  const [zip, setZip] = useState(0);
+  const [dist, setDist] = useState(0);
+  const dispatch = useDispatch();
   return (
     <div className="card card-body mb-4">
       <h4 className="mb-3">By Location</h4>
@@ -9,9 +14,10 @@ const LocationFilter = () => {
           <div className="col-md-6">
             <div className="form-group">
               <input
-                type="text"
+                value={dist}
+                onChange={(e) => setDist(e.target.value)}
+                type="number"
                 className="form-control"
-                name="miles"
                 placeholder="Miles From"
               />
             </div>
@@ -19,19 +25,19 @@ const LocationFilter = () => {
           <div className="col-md-6">
             <div className="form-group">
               <input
-                type="text"
+                value={zip}
+                onChange={(e) => setZip(e.target.value)}
+                type="number"
                 className="form-control"
-                name="zipcode"
                 placeholder="Enter Zipcode"
               />
             </div>
           </div>
         </div>
-        <input
-          type="submit"
-          value="Find Bootcamps"
-          className="btn btn-primary btn-block"
-        />
+        <button onClick={(e) => {
+          e.preventDefault();
+          dispatch(getBootcampsInRadius(zip,dist))
+        }} className="btn btn-outline-primary btn-block"> Find Bootcamps </button>
       </form>
     </div>
   );
