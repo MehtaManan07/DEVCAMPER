@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBootcampsInRadius } from "../../../redux/actions/Bootcamps";
 
 const LocationFilter = () => {
-  const [zip, setZip] = useState(0);
-  const [dist, setDist] = useState(0);
+  const [zip, setZip] = useState(undefined);
+  const [dist, setDist] = useState(undefined);
   const dispatch = useDispatch();
   return (
     <div className="card card-body mb-4">

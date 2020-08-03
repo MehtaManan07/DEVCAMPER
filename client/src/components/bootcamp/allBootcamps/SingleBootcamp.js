@@ -11,12 +11,14 @@ const SingleBootcamp = ({ bootcamp }) => {
         <div className="col-md-8">
           <div className="card-body">
             <h5 className="card-title">
-              <Link to={`/bootcamp/${bootcamp._id}`}>
+              <Link to={`/bootcamp/${bootcamp.slug}/${bootcamp._id}`}>
                 {bootcamp.name}
                 <span className="float-right badge badge-success">8.8</span>
               </Link>
             </h5>
-            <span className="badge badge-dark mb-2">Boston, MA</span>
+            <span className="badge badge-dark mb-2">
+              {bootcamp.location.city}, {bootcamp.location.state}
+            </span>
             <p className="card-text">{bootcamp.careers.join()}</p>
           </div>
         </div>
