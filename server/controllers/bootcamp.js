@@ -93,7 +93,7 @@ exports.getBootcampsInRadius = asyncHandler(async (req, res, next) => {
   // Get lat/lang from geocoder
   const loc = await geocoder.geocode(zipcode);
   const lat = loc[0].latitude;
-  const lon = loc[0].latitude;
+  const lon = loc[0].longitude;
 
   // Calc radius and unit is radius;
   const radius = distance / 3963;
