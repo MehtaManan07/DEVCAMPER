@@ -1,6 +1,6 @@
 import React from "react";
-import {Link} from 'react-router-dom'
-import image from '../../../img/image_1.jpg'
+import { Link } from "react-router-dom";
+import image from "../../../img/image_1.jpg";
 const SingleBootcamp = ({ bootcamp }) => {
   return (
     <div className="card mb-3">
@@ -17,9 +17,7 @@ const SingleBootcamp = ({ bootcamp }) => {
               </Link>
             </h5>
             <span className="badge badge-dark mb-2">Boston, MA</span>
-            <p className="card-text">
-              {bootcamp.careers.join()}
-            </p>
+            <p className="card-text">{bootcamp.careers.join()}</p>
           </div>
         </div>
       </div>
