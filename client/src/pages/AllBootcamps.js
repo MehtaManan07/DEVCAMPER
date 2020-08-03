@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import LocationFilter from "../components/bootcamp/allBootcamps/LocationFilter";
 import OtherFilters from "../components/bootcamp/allBootcamps/OtherFilters";
 import SingleBootcamp from "../components/bootcamp/allBootcamps/SingleBootcamp";
+import Loader from "../components/core/Spinner";
 
 const AllBootcamps = () => {
   const listBootcamps = useSelector((state) => state.listBootcamps);
@@ -13,7 +14,7 @@ const AllBootcamps = () => {
   useEffect(() => {
     dispatch(getBootcamps());
   }, []);
-  console.log(listBootcamps);
+  console.log(bootcamps.length);
   return (
         <div className="container mt-5">
           <div className="row">
@@ -23,9 +24,9 @@ const AllBootcamps = () => {
               <OtherFilters />
             </div>
             <div className="col-md-8">
-            {bootcamps.map(bootcamp => (
+            {!loading ? bootcamps.length > 1 ? bootcamps.map(bootcamp => (
               <SingleBootcamp bootcamp={bootcamp} key={bootcamp._id} />
-            ))}
+            )) : <h2> No bootcamps found </h2> : <Loader text="Ha bhai" /> }
               <nav aria-label="Page navigation example">
                 {/* <ul className="pagination">
                   <li className="page-item">
