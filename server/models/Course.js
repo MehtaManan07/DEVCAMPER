@@ -21,21 +21,21 @@ const courseSchema = new mongoose.Schema({
   minimumSkill: {
     type: String,
     required: [true, "PLease add a minimum skill"],
-    enum: ["beginner", "intermediate", "advanced"]
+    enum: ["beginner", "intermediate", "advanced"],
   },
   scholarhipsAvailable: {
     type: Boolean,
-    default: false
+    default: false,
   },
   date: {
-      type: Date,
-      default: Date.now
+    type: Date,
+    default: Date.now,
   },
   bootcamp: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Bootcamp",
-      required: true
-  }
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "BootCamp",
+    required: true,
+  },
 });
-const Course = mongoose.model("Course",courseSchema)
-module.exports = Course
+const Course = mongoose.model("Course", courseSchema);
+module.exports = Course;
