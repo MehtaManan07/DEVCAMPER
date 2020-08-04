@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonGroup, Row, Col } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 
 const CreateBootcamp = () => {
   return (
@@ -81,7 +81,7 @@ const CreateBootcamp = () => {
                     rows="5"
                     className="form-control"
                     placeholder="Description (What you offer, etc)"
-                    maxlength="500"
+                    maxLength="500"
                   ></textarea>
                   <small className="form-text text-muted">
                     No more than 500 characters
@@ -90,7 +90,8 @@ const CreateBootcamp = () => {
                 <div className="form-group">
                   <label>Careers</label>
                   <select name="careers" className="custom-select" multiple>
-                    <option selected>Select all that apply</option>
+                    <option>Select all that apply</option>
+                    {/* selected was passed as prop here */}
                     <option value="Web Development">Web Development</option>
                     <option value="Mobile Development">
                       Mobile Development
@@ -108,7 +109,7 @@ const CreateBootcamp = () => {
                     name="housing"
                     id="housing"
                   />
-                  <label className="form-check-label" for="housing">
+                  <label className="form-check-label" htmlFor="housing">
                     Housing
                   </label>
                 </div>
@@ -119,7 +120,7 @@ const CreateBootcamp = () => {
                     name="jobAssistance"
                     id="jobAssistance"
                   />
-                  <label className="form-check-label" for="jobAssistance">
+                  <label className="form-check-label" htmlFor="jobAssistance">
                     Job Assistance
                   </label>
                 </div>
@@ -130,7 +131,7 @@ const CreateBootcamp = () => {
                     name="jobGuarantee"
                     id="jobGuarantee"
                   />
-                  <label className="form-check-label" for="jobGuarantee">
+                  <label className="form-check-label" htmlFor="jobGuarantee">
                     Job Guarantee
                   </label>
                 </div>
@@ -141,7 +142,7 @@ const CreateBootcamp = () => {
                     name="acceptGi"
                     id="acceptGi"
                   />
-                  <label className="form-check-label" for="acceptGi">
+                  <label className="form-check-label" htmlFor="acceptGi">
                     Accepts GI Bill
                   </label>
                 </div>
