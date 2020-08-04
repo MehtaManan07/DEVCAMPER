@@ -154,8 +154,16 @@ const CreateBootcamp = () => {
           </div>
         </div>
         <Row>
-       <Col> <Button className="my-4" variant="outline-success" block size="lg">Submit</Button> </Col>
-       <Col> <Button className="my-4" variant="outline-danger" block size="lg">Cancel</Button> </Col>
+          <Col>
+            <Button className="my-4" variant="outline-success" block size="lg">
+              Submit
+            </Button>
+          </Col>
+          <Col>
+            <Button className="my-4" variant="outline-danger" block size="lg">
+              Cancel
+            </Button>
+          </Col>
         </Row>
       </form>
     </section>
