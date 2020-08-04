@@ -13,6 +13,7 @@ exports.createBootcamp = asyncHandler(async (req, res, next) => {
     success: true,
     data: newBootcamp,
   });
+  console.log(req.body)
 });
 
 // @desc      Get all bootcamps
