@@ -20,7 +20,8 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use("/api/v1/bootcamps", require("./server/routes/Bootcamps"));
+app.use("/api/v1/bootcamps", require("./server/routes/bootcamps"));
+app.use("/api/v1/courses", require("./server/routes/courses"));
 app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000;

@@ -16,8 +16,8 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
   }
   const courses = await query;
   res.status(200).json({
-    data: courses,
-    count: courses.length,
     success: true,
+    count: courses.length,
+    data: courses,
   });
 });
