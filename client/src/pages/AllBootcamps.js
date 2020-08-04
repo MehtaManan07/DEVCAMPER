@@ -24,7 +24,7 @@ const AllBootcamps = () => {
               <OtherFilters />
             </div>
             <div className="col-md-8">
-            {!loading ? bootcamps.length > 1 ? bootcamps.map(bootcamp => (
+            {!loading ? bootcamps.length > 0 ? bootcamps.map(bootcamp => (
               <SingleBootcamp bootcamp={bootcamp} key={bootcamp._id} />
             )) : <h2> No bootcamps found </h2> : <Loader text="Ha bhai" /> }
               <nav aria-label="Page navigation example">

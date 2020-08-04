@@ -164,7 +164,6 @@ exports.getBootcampsInRadius = asyncHandler(async (req, res, next) => {
 
   // Calc radius and unit is radius;
   const radius = distance / 3963;
-  console.log(distance, radius, distance / 3963);
   const bootcamps = await Bootcamp.find({
     location: { $geoWithin: { $centerSphere: [[lon, lat], radius] } },
   });
