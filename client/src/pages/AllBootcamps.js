@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getBootcamps } from "../redux/actions/Bootcamps";
-import { useEffect } from "react";
 import LocationFilter from "../components/bootcamp/allBootcamps/LocationFilter";
 import OtherFilters from "../components/bootcamp/allBootcamps/OtherFilters";
 import SingleBootcamp from "../components/bootcamp/allBootcamps/SingleBootcamp";

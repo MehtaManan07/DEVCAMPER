@@ -12,12 +12,10 @@ const LocationForm = ({ showcase = false }) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(getBootcampsInRadius(zip, dist));
-    history.push(`/all/bootcamps?zipcode=${zip}&miles=${dist}`);
+    history.push(`/all/bootcamps`);
     setDist(0);
     setZip(0);
   };
-
-  console.log(zip,dist)
 
   return (
     <form>
