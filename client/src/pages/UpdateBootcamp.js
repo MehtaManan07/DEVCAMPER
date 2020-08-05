@@ -39,7 +39,7 @@ const UpdateBootcamp = () => {
      bootcamp!==null && setValues({
        ...values, name: bootcamp!== null && bootcamp.name,
         address: bootcamp!== null && bootcamp.address,
-        phoneNum: bootcamp!== null && bootcamp.phoneNum,
+        phoneNum: bootcamp!== null && bootcamp.phone,
         email: bootcamp!== null && bootcamp.email,
         website: bootcamp!== null && bootcamp.website,
         careers: bootcamp!== null && bootcamp.careers,
@@ -51,7 +51,7 @@ const UpdateBootcamp = () => {
       });
 
     // eslint-disable-next-line
-  }, [id]);
+  }, []);
 
   return (
     <section className="container mt-5">

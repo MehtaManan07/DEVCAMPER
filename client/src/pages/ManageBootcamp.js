@@ -13,7 +13,7 @@ const ManageBootcamp = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBootcamp(id));
-  }, [id]);
+  }, []);
 
   const deleteBootcamp = () => {
     alert("Are you sure? this can't be undone!!");

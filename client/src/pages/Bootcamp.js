@@ -15,7 +15,7 @@ const Bootcamp = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBootcamp(id));
-  }, [id]);
+  }, []);
   return (
     <section className="bootcamp mt-5">
       {bootcamp === null || loading ? (
