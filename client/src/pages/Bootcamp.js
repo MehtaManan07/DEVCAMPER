@@ -9,7 +9,7 @@ import BootcampCourse from "../components/bootcamp/BootcampCourse";
 const Bootcamp = () => {
   const listBootcamps = useSelector((state) => state.listBootcamps);
   const { bootcamp, loading, error } = listBootcamps;
-  const { name, id } = useParams();
+  const { id } = useParams();
   const tick = "fas fa-check text-success";
   const cross = "fas fa-times text-danger"
   const dispatch = useDispatch();

@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import { Button, Row, Col, Alert } from "react-bootstrap";
-import Select from "react-select";
-import Loader from "../components/core/Spinner";
-import makeAnimated from "react-select/animated";
+import { Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createBootcamp } from "../redux/actions/Bootcamps";
 import CreateUpdateForm from "../components/bootcamp/CreateUpdateForm";
