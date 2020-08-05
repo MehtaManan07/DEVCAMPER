@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import CreateUpdateForm from "../components/bootcamp/CreateUpdateForm";
+import BootcampForm from "../components/bootcamp/BootcampForm";
 import { useParams } from "react-router-dom";
 import { updateBootcamp, getBootcamp } from "../redux/actions/Bootcamps";
 
@@ -64,7 +64,7 @@ const UpdateBootcamp = () => {
       ),3000): (
         <></>
       )}
-      <CreateUpdateForm
+      <BootcampForm
         values={values}
         loading={loading}
         setValues={setValues}

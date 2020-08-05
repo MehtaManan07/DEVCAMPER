@@ -4,7 +4,7 @@ import makeAnimated from "react-select/animated";
 import Loader from "../core/Spinner";
 import { Col, Row, Button } from "react-bootstrap";
 
-const CreateUpdateForm = ({
+const BootcampForm = ({
   values,
   loading,
   setValues,
@@ -205,4 +205,4 @@ const CreateUpdateForm = ({
   );
 };
 
-export default CreateUpdateForm;
+export default BootcampForm;

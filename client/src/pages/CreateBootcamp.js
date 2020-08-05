@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createBootcamp } from "../redux/actions/Bootcamps";
-import CreateUpdateForm from "../components/bootcamp/CreateUpdateForm";
+import BootcampForm from "../components/bootcamp/BootcampForm";
 
 const CreateBootcamp = () => {
   const [values, setValues] = useState({
@@ -41,7 +41,7 @@ const CreateBootcamp = () => {
       ) : (
         <></>
       )}
-      <CreateUpdateForm
+      <BootcampForm
         values={values}
         loading={loading}
         setValues={setValues}
