@@ -9,11 +9,10 @@ import Loader from "../components/core/Spinner";
 const AllBootcamps = () => {
   const listBootcamps = useSelector((state) => state.listBootcamps);
   const dispatch = useDispatch();
-  const { bootcamps, loading, error } = listBootcamps;
+  const { bootcamps, loading } = listBootcamps;
   useEffect(() => {
     dispatch(getBootcamps());
   }, []);
-  console.log(bootcamps.length);
   return (
         <div className="container mt-5">
           <div className="row">

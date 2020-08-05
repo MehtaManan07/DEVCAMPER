@@ -8,7 +8,10 @@ import {
   GET_BOOTCAMPS_RAD_SUCCESS,
   CREATE_BOOTCAMP_REQUEST,
   CREATE_BOOTCAMP_SUCCESS,
-  CREATE_BOOTCAMP_FAILURE
+  CREATE_BOOTCAMP_FAILURE,
+  GET_BOOTCAMP_REQUEST,
+  GET_BOOTCAMP_SUCCESS,
+  GET_BOOTCAMP_FAILURE
 } from "../types";
 
 export const getBootcamps = () => async (dispatch) => {
@@ -19,7 +22,21 @@ export const getBootcamps = () => async (dispatch) => {
     dispatch({ type: GET_BOOTCAMPS_SUCCESS, payload: bootcamps.data.data });
   } catch (error) {
     console.log(error);
-    dispatch({ type: GET_BOOTCAMPS_FAILURE, payload: error });
+    const displayErr = error.response.data.error
+    dispatch({ type: GET_BOOTCAMPS_FAILURE, payload: displayErr });
+  }
+};
+
+export const getBootcamp = (id) => async (dispatch) => {
+  dispatch({ type: GET_BOOTCAMP_REQUEST });
+  try {
+    const bootcamp = await axios.get(`/api/v1/bootcamps/${id}`);
+    console.log(bootcamp);
+    dispatch({ type: GET_BOOTCAMP_SUCCESS, payload: bootcamp.data.data });
+  } catch (error) {
+    console.log(error);
+    const displayErr = error.response.data.error
+    dispatch({ type: GET_BOOTCAMP_FAILURE, payload: displayErr });
   }
 };
 
@@ -33,7 +50,8 @@ export const getBootcampsInRadius = (zipcode, distance) => async (dispatch) => {
     dispatch({ type: GET_BOOTCAMPS_RAD_SUCCESS, payload: bootcamps.data.data });
   } catch (error) {
     console.log(error.response.data);
-    dispatch({ type: GET_BOOTCAMPS_RAD_FAILURE, payload: error });
+    const displayErr = error.response.data.error
+    dispatch({ type: GET_BOOTCAMPS_RAD_FAILURE, payload: displayErr });
   }
 };
 
