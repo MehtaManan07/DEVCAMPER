@@ -1,11 +1,12 @@
 import React from "react";
 import { useHistory, useLocation, Link } from "react-router-dom";
 import image from "../img/image_1.jpg";
+import ManageTop from "../components/bootcamp/ManageTop";
 
 const ManageCourses = (props) => {
     const history = useHistory()
-    const location = useLocation()
-    console.log(location)
+    const {state} = useLocation()
+    console.log(state)
   return (
     <section className="container mt-5">
       <div className="row">
@@ -20,29 +21,7 @@ const ManageCourses = (props) => {
                 <i className="fas fa-chevron-left"></i> Manage Bootcamp
               </span>
               <h1 className="mb-4">Manage Courses</h1>
-              <div className="card mb-3">
-                <div className="row no-gutters">
-                  <div className="col-md-4">
-                    <img src={image} className="card-img" alt="..." />
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        <a href="bootcamp.html">
-                          Devworks Bootcamp
-                          <span className="float-right badge badge-success">
-                            4.9
-                          </span>
-                        </a>
-                      </h5>
-                      <span className="badge badge-dark mb-2">Boston, MA</span>
-                      <p className="card-text">
-                        Web Development, UI/UX, Mobile Development
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ManageTop bootcamp={state} />
 
               <Link
                 // to={`/add/course/${bootcamp}`}
@@ -59,28 +38,20 @@ const ManageCourses = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Front End Web Development</td>
+                  { state && state.courses.map(course => (
+                    <tr key={course._id}>
+                    <td>{course.title}</td>
                     <td>
-                      <a href="add-course.html" className="btn btn-secondary">
+                      <Link to="/" className="btn btn-secondary">
                         <i className="fas fa-pencil-alt"></i>
-                      </a>
+                      </Link>
                       <button className="btn btn-danger">
                         <i className="fas fa-times"></i>
                       </button>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Full Stack Web Development</td>
-                    <td>
-                      <a href="add-course.html" className="btn btn-secondary">
-                        <i className="fas fa-pencil-alt"></i>
-                      </a>
-                      <button className="btn btn-danger">
-                        <i className="fas fa-times"></i>
-                      </button>
-                    </td>
-                  </tr>
+                  ))
+                  }
                 </tbody>
               </table>
             </div>
