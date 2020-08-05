@@ -31,7 +31,7 @@ const Bootcamp = () => {
               {/* <!-- Avg cost --> */}
               <p className="lead mb-4">
                 Average Course Cost:
-                <span className="text-primary">${bootcamp.averageCourse}</span>
+                <span className="text-primary">${bootcamp.averageCost}</span>
               </p>
               {/* <!-- Courses --> */}
               {bootcamp.courses.map((course) => (
