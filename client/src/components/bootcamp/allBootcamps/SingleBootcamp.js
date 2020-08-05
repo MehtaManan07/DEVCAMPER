@@ -19,7 +19,7 @@ const SingleBootcamp = ({ bootcamp }) => {
             <span className="badge badge-dark mb-2">
               {bootcamp.location.city}, {bootcamp.location.state}
             </span>
-            <p className="card-text">{bootcamp.careers.join()}</p>
+            <p className="card-text">{bootcamp.careers.join(", ")}</p>
           </div>
         </div>
       </div>
