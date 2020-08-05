@@ -14,6 +14,9 @@ import {
   UPDATE_BOOTCAMP_REQUEST,
   UPDATE_BOOTCAMP_SUCCESS,
   UPDATE_BOOTCAMP_FAILURE,
+  REMOVE_BOOTCAMP_FAILURE,
+  REMOVE_BOOTCAMP_REQUEST,
+  REMOVE_BOOTCAMP_SUCCESS,
 } from "../types";
 
 const initialState = {
@@ -33,6 +36,7 @@ export const getBootcampsReducer = (
     case GET_BOOTCAMP_REQUEST:
     case CREATE_BOOTCAMP_REQUEST:
     case UPDATE_BOOTCAMP_REQUEST:
+    case REMOVE_BOOTCAMP_REQUEST:
       return { ...state, loading: true };
 
     case GET_BOOTCAMPS_SUCCESS:
@@ -44,11 +48,20 @@ export const getBootcampsReducer = (
     case GET_BOOTCAMP_SUCCESS:
       return { ...state, loading: false, bootcamp: payload };
 
+    case REMOVE_BOOTCAMP_SUCCESS:
+      return {
+        ...state,
+        bootcamps: state.bootcamps.filter(
+          (bootcamp) => bootcamp._id !== payload
+        ),
+      };
+
     case GET_BOOTCAMPS_FAILURE:
     case GET_BOOTCAMP_FAILURE:
     case GET_BOOTCAMPS_RAD_FAILURE:
     case CREATE_BOOTCAMP_FAILURE:
     case UPDATE_BOOTCAMP_FAILURE:
+    case REMOVE_BOOTCAMP_FAILURE:
       return { ...state, loading: false, error: payload };
 
     default:
