@@ -4,12 +4,13 @@ import makeAnimated from "react-select/animated";
 import Loader from "../core/Spinner";
 import { Col, Row, Button } from "react-bootstrap";
 
-const createUpdateForm = ({
+const CreateUpdateForm = ({
   values,
   loading,
   setValues,
   onSubmitHandler,
-  setTempCareers
+  setTempCareers,
+  id
 }) => {
   const options = [
     { value: "Web Development", label: "Web Development" },
@@ -24,10 +25,9 @@ const createUpdateForm = ({
     setValues({ ...values, [name]: e.target.value });
   };
   const animatedComponents = makeAnimated();
-
   return (
     <div>
-      {!loading ? (
+      {!loading  ? (
         <form onSubmit={onSubmitHandler}>
           <div className="row">
             <div className="col-md-6">
@@ -205,4 +205,4 @@ const createUpdateForm = ({
   );
 };
 
-export default createUpdateForm;
+export default CreateUpdateForm;

@@ -11,7 +11,10 @@ import {
   CREATE_BOOTCAMP_FAILURE,
   GET_BOOTCAMP_REQUEST,
   GET_BOOTCAMP_SUCCESS,
-  GET_BOOTCAMP_FAILURE
+  GET_BOOTCAMP_FAILURE,
+  UPDATE_BOOTCAMP_REQUEST,
+  UPDATE_BOOTCAMP_SUCCESS,
+  UPDATE_BOOTCAMP_FAILURE
 } from "../types";
 
 export const getBootcamps = () => async (dispatch) => {
@@ -56,7 +59,7 @@ export const getBootcampsInRadius = (zipcode, distance) => async (dispatch) => {
 };
 
 export const createBootcamp = (data) => async (dispatch) => {
-  dispatch({ type: CREATE_BOOTCAMP_REQUEST });
+  dispatch({ type: UPDATE_BOOTCAMP_REQUEST });
   try {
     const bootcamps = await axios.post(
       `/api/v1/bootcamps`,
@@ -66,7 +69,25 @@ export const createBootcamp = (data) => async (dispatch) => {
       }
     );
     console.log(bootcamps);
-    dispatch({ type: CREATE_BOOTCAMP_SUCCESS, payload: bootcamps.data.data });
+    dispatch({ type: UPDATE_BOOTCAMP_SUCCESS, payload: bootcamps.data.data });
+  } catch (error) {
+    const displayErr = error.response.data.error.split(',')
+    dispatch({ type: UPDATE_BOOTCAMP_FAILURE, payload: displayErr });
+  }
+};
+
+export const updateBootcamp = (data, id) => async (dispatch) => {
+  dispatch({ type: CREATE_BOOTCAMP_REQUEST });
+  try {
+    const bootcamp = await axios.put(
+      `/api/v1/bootcamps/${id}`,
+      data,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    console.log(bootcamp);
+    dispatch({ type: CREATE_BOOTCAMP_SUCCESS, payload: bootcamp.data.data });
   } catch (error) {
     const displayErr = error.response.data.error.split(',')
     dispatch({ type: CREATE_BOOTCAMP_FAILURE, payload: displayErr });

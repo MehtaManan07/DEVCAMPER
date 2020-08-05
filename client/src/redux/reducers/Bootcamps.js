@@ -11,6 +11,9 @@ import {
   GET_BOOTCAMP_REQUEST,
   GET_BOOTCAMP_SUCCESS,
   GET_BOOTCAMP_FAILURE,
+  UPDATE_BOOTCAMP_REQUEST,
+  UPDATE_BOOTCAMP_SUCCESS,
+  UPDATE_BOOTCAMP_FAILURE,
 } from "../types";
 
 const initialState = {
@@ -29,19 +32,25 @@ export const getBootcampsReducer = (
     case GET_BOOTCAMPS_RAD_REQUEST:
     case GET_BOOTCAMP_REQUEST:
     case CREATE_BOOTCAMP_REQUEST:
+    case UPDATE_BOOTCAMP_REQUEST:
       return { ...state, loading: true };
+
     case GET_BOOTCAMPS_SUCCESS:
     case GET_BOOTCAMPS_RAD_SUCCESS:
       return { ...state, loading: false, bootcamps: payload };
+
     case CREATE_BOOTCAMP_SUCCESS:
-      return { ...state, loading: false, bootcamp: payload };
+    case UPDATE_BOOTCAMP_SUCCESS:
     case GET_BOOTCAMP_SUCCESS:
       return { ...state, loading: false, bootcamp: payload };
+
     case GET_BOOTCAMPS_FAILURE:
     case GET_BOOTCAMP_FAILURE:
     case GET_BOOTCAMPS_RAD_FAILURE:
     case CREATE_BOOTCAMP_FAILURE:
+    case UPDATE_BOOTCAMP_FAILURE:
       return { ...state, loading: false, error: payload };
+
     default:
       return state;
   }

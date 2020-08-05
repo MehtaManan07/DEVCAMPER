@@ -6,6 +6,7 @@ import AllBootcamps from './pages/AllBootcamps';
 import CreateBootcamp from './pages/CreateBootcamp';
 import AddCourse from './pages/AddCourse';
 import Bootcamp from './pages/Bootcamp';
+import UpdateBootcamp from './pages/UpdateBootcamp';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route exact path="/bootcamp/:name/:id" component={Bootcamp} />
       <Route path="/all/bootcamps" component={AllBootcamps} exact />
       <Route path="/new/bootcamp" component={CreateBootcamp} exact />
+      <Route path="/update/bootcamp/:id" component={UpdateBootcamp} exact />
       <Route path="/new/course" component={AddCourse} exact />
       </Switch>
     </div>

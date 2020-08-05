@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import image from "../img/image_1.jpg";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getBootcamp } from "../redux/actions/Bootcamps";
 import Loader from "../components/core/Spinner";
@@ -66,6 +66,7 @@ const Bootcamp = () => {
               >
                 <i className="fas fa-globe"></i> Visit Website
               </a>
+              <Link className="btn btn-dark btn-block my-3" to={`/update/bootcamp/${bootcamp._id}`}> Update Bootcamp </Link>
               {/* <!-- Map --> */}
               <div id="map" style={{ width: "100%", height: "300px" }}></div>
               {/* <!-- Perks --> */}
