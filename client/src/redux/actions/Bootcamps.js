@@ -77,7 +77,7 @@ export const createBootcamp = (data) => async (dispatch) => {
 };
 
 export const updateBootcamp = (data, id) => async (dispatch) => {
-  dispatch({ type: CREATE_BOOTCAMP_REQUEST });
+  dispatch({ type: UPDATE_BOOTCAMP_REQUEST });
   try {
     const bootcamp = await axios.put(
       `/api/v1/bootcamps/${id}`,
@@ -87,9 +87,9 @@ export const updateBootcamp = (data, id) => async (dispatch) => {
       }
     );
     console.log(bootcamp);
-    dispatch({ type: CREATE_BOOTCAMP_SUCCESS, payload: bootcamp.data.data });
+    dispatch({ type: UPDATE_BOOTCAMP_SUCCESS, payload: bootcamp.data.data });
   } catch (error) {
     const displayErr = error.response.data.error.split(',')
-    dispatch({ type: CREATE_BOOTCAMP_FAILURE, payload: displayErr });
+    dispatch({ type: UPDATE_BOOTCAMP_FAILURE, payload: displayErr });
   }
 };

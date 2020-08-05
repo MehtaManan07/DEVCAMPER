@@ -73,7 +73,7 @@ const AddCourse = () => {
 										name="scholarshipAvailable"
 										id="scholarshipAvailable"
 									/>
-									<label className="form-check-label" for="scholarshipAvailable">
+									<label className="form-check-label" htmlFor="scholarshipAvailable">
 										Scholarship Available
 									</label>
 								</div>

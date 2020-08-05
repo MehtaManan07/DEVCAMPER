@@ -14,74 +14,74 @@ const ManageBootcamp = () => {
     dispatch(getBootcamp(id));
   }, [id]);
   return (
-    <section class="container mt-5">
+    <section className="container mt-5">
       {bootcamp === null || loading ? (
         <Loader />
       ) : (
-        <div class="row">
-          <div class="col-md-8 m-auto">
-            <div class="card bg-white py-2 px-4">
-              <div class="card-body">
-                <h1 class="mb-4">Manage Bootcamp</h1>
-                <div class="card mb-3">
-                  <div class="row no-gutters">
-                    <div class="col-md-4">
-                      <img src={image} class="card-img" alt="..." />
+        <div className="row">
+          <div className="col-md-8 m-auto">
+            <div className="card bg-white py-2 px-4">
+              <div className="card-body">
+                <h1 className="mb-4">Manage Bootcamp</h1>
+                <div className="card mb-3">
+                  <div className="row no-gutters">
+                    <div className="col-md-4">
+                      <img src={image} className="card-img" alt="..." />
                     </div>
-                    <div class="col-md-8">
-                      <div class="card-body">
-                        <h5 class="card-title">
+                    <div className="col-md-8">
+                      <div className="card-body">
+                        <h5 className="card-title">
                           <Link to={`/bootcamp/${bootcamp.name}/${bootcamp._id}`}>
                             {bootcamp.name}
-                            <span class="float-right badge badge-success">
+                            <span className="float-right badge badge-success">
                               8.8
                             </span>
                           </Link>
                         </h5>
-                        <span class="badge badge-dark mb-2">{bootcamp.location.city}, {bootcamp.location.state}</span>
-                        <p class="card-text">
+                        <span className="badge badge-dark mb-2">{bootcamp.location.city}, {bootcamp.location.state}</span>
+                        <p className="card-text">
                           {bootcamp.careers.join(", ")}
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
-                <form class="mb-4">
-                  <div class="form-group">
-                    <div class="custom-file">
+                <form className="mb-4">
+                  <div className="form-group">
+                    <div className="custom-file">
                       <input
                         type="file"
                         name="photo"
-                        class="custom-file-input"
+                        className="custom-file-input"
                         id="photo"
                       />
-                      <label class="custom-file-label" for="photo">
+                      <label className="custom-file-label" htmlFor="photo">
                         Add Bootcamp Image
                       </label>
                     </div>
                   </div>
                   <input
                     type="submit"
-                    class="btn btn-light btn-block"
+                    className="btn btn-light btn-block"
                     value="Upload Image"
                   />
                 </form>
-                <Link to={`/update/bootcamp/:${bootcamp._id}`} class="btn btn-primary btn-block">
+                <Link to={`/update/bootcamp/${bootcamp._id}`} className="btn btn-primary btn-block">
                   Edit Bootcamp Details
                 </Link>
                 <Link
                   to={`/manage/courses/${bootcamp._id}`}
-                  class="btn btn-secondary btn-block"
+                  className="btn btn-secondary btn-block"
                 >
                   Manage Courses
                 </Link>
-                <span style={{ cursor: "pointer" }} onClick={() => alert("delete me")} class="btn btn-danger btn-block">
+                <span style={{ cursor: "pointer" }} onClick={() => alert("delete me")} className="btn btn-danger btn-block">
                   Remove Bootcamp
                 </span>
-                <p class="text-muted mt-5">
+                <p className="text-muted mt-5">
                   * You can only add one bootcamp per account.
                 </p>
-                <p class="text-muted">
+                <p className="text-muted">
                   * You must be affiliated with the bootcamp in some way in
                   order to add it to DevCamper.
                 </p>

@@ -30,7 +30,6 @@ const UpdateBootcamp = () => {
     let careerss = [];
     tempCareers.map((val) => careerss.push(val.value));
     setValues({ ...values, careers: careerss });
-    console.log(values);
     await dispatch(updateBootcamp(values, id));
   };
 
@@ -56,14 +55,13 @@ const UpdateBootcamp = () => {
 
   return (
     <section className="container mt-5">
-      {JSON.stringify(bootcamp)}
       <h1 className="mb-2">Add Bootcamp</h1>
       <p>
         Important: You must be affiliated with a bootcamp to add to DevCamper
       </p>
-      {error.length > 0 ? (
+      {error.length > 0 ? setTimeout(() => (
         <Alert variant="danger"> {error && error[0]} </Alert>
-      ) : (
+      ),3000): (
         <></>
       )}
       <CreateUpdateForm
