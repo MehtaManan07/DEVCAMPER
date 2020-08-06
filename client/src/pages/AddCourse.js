@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useHistory, useLocation } from "react-router-dom";
 import CourseForm from "../components/courses/CourseForm";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addCourse } from "../redux/actions/Courses";
 
 const AddCourse = () => {
@@ -14,21 +14,27 @@ const AddCourse = () => {
     description: "",
   });
   const { id } = useParams();
-  const courses = useSelector(state => state.courses)
-  const { loading, error, course } = courses;
   const dispatch = useDispatch();
   const { state } = useLocation();
+  const history = useHistory();
   const onSubmitHandler = (e) => {
     e.preventDefault();
     console.log(values)
     dispatch(addCourse(id,values))
+    setValues({ ...values, 
+      title: "",
+      minimumSkill: "",
+      tuition: "",
+      weeks: 0,
+      scholarhipsAvailable: false,
+      description: "",
+    })
+    history.push(`/manage/courses/${id}`)
   }
-  const history = useHistory();
   return (
     <section className="container mt-5">
     <div className="row">
         <div className="col-md-8 m-auto">
-        {JSON.stringify({ loading, error, course })}
           <div className="card bg-white py-2 px-4">
             <div className="card-body">
               <span
