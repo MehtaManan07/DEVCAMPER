@@ -24,8 +24,7 @@ const ManageCourses = (props) => {
               <ManageTop bootcamp={state} />
 
               <Link
-                // to={`/add/course/${bootcamp}`}
-                to="/"
+                to={{ pathname: `/new/course/${state._id}`, state }}
                 className="btn btn-primary btn-block mb-4"
               >
                 Add Bootcamp Course

@@ -22,7 +22,7 @@ function App() {
       <Route path="/manage/courses/:id" component={ManageCourses} exact />
       <Route path="/manage/bootcamp/:id" component={ManageBootcamp} exact />
       <Route path="/update/bootcamp/:id" component={UpdateBootcamp} exact />
-      <Route path="/new/course" component={AddCourse} exact />
+      <Route path="/new/course/:id" component={AddCourse} exact />
       </Switch>
     </div>
   );
