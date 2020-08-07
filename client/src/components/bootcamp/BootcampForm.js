@@ -12,7 +12,7 @@ const BootcampForm = ({
   setTempCareers,
   id
 }) => {
-  const options = [
+ const options = [
     { value: "Web Development", label: "Web Development" },
     { value: "Mobile Development", label: "Mobile Development" },
     { value: "Business", label: "Business" },

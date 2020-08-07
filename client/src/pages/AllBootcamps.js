@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getBootcamps } from "../redux/actions/Bootcamps";
 import LocationFilter from "../components/bootcamp/allBootcamps/LocationFilter";
@@ -7,6 +7,11 @@ import SingleBootcamp from "../components/bootcamp/allBootcamps/SingleBootcamp";
 import Loader from "../components/core/Spinner";
 
 const AllBootcamps = () => {
+  const [filters, setFilters] = useState({
+    career: "",
+    ratings: "",
+    price: ""
+  })
   const listBootcamps = useSelector((state) => state.listBootcamps);
   const dispatch = useDispatch();
   const { bootcamps, loading } = listBootcamps;
@@ -19,7 +24,7 @@ const AllBootcamps = () => {
             <div className="col-md-4">
               <LocationFilter /> 
               <h4>Filter</h4>
-              <OtherFilters />
+              <OtherFilters  />
             </div>
             <div className="col-md-8">
             {!loading ? bootcamps.length > 0 ? bootcamps.map(bootcamp => (

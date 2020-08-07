@@ -18,10 +18,11 @@ const CreateBootcamp = () => {
     jobGuarantee: false,
     acceptGi: false,
   });
+  const [tempCareers, setTempCareers] = useState([]);
+  
   const dispatch = useDispatch();
   const listBootcamps = useSelector((state) => state.listBootcamps);
   const { loading, error } = listBootcamps;
-  const [tempCareers, setTempCareers] = useState([]);
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     let careerss = [];

@@ -1,27 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 
 const OtherFilters = () => {
+  const [filters, setFilters] = useState({
+    career: "",
+    ratings: "",
+    price: "",
+  });
+
+  const animatedComponents = makeAnimated();
+  const CareerOptions = [
+    { value: "Web Development", label: "Web Development" },
+    { value: "Mobile Development", label: "Mobile Development" },
+    { value: "Business", label: "Business" },
+    { value: "Data Science", label: "Data Science" },
+    { value: "UI/UX", label: "UI/UX" },
+  ];
+
+  const costOptions = [
+    { value: "20000", label: "$20000" },
+    { value: "15000", label: "$15000" },
+    { value: "10000", label: "$10000" },
+    { value: "8000", label: "$8000" },
+    { value: "6000", label: "$6000" },
+    { value: "4000", label: "$4000" },
+    { value: "2000", label: "$2000" },
+  ];
+
   return (
     <form>
+      {JSON.stringify(filters)}
       <div className="form-group">
-        <label> Career</label>
-        <select className="custom-select mb-2">
-          <option value="any"> { /* selected was passed as prop here */ }
-            Any
-          </option>
-          <option value="Web Development">Web Development</option>
-          <option value="Mobile Development">Mobile Development</option>
-          <option value="UI/UX">UI/UX</option>
-          <option value="Data Science">Data Science</option>
-          <option value="Business">Business</option>
-          <option value="Other">Other</option>
-        </select>
+        <label>Careers</label>
+        <Select
+          value={filters.career.value}
+          onChange={(e) => setFilters({ ...filters, career: e.value })}
+          components={animatedComponents}
+          options={CareerOptions}
+        />
       </div>
 
       <div className="form-group">
         <label> Rating</label>
         <select className="custom-select mb-2">
-          <option value="any">  { /* selected was passed as prop here */ }
+          <option value="any">
+            {" "}
+            {/* selected was passed as prop here */}
             Any
           </option>
           <option value="9">9+</option>
@@ -37,18 +62,12 @@ const OtherFilters = () => {
 
       <div className="form-group">
         <label> Budget</label>
-        <select className="custom-select mb-2">
-          <option value="any"> { /* selected was passed as prop here */ }
-            Any
-          </option>
-          <option value="20000">$20,000</option>
-          <option value="15000">$15,000</option>
-          <option value="10000">$10,000</option>
-          <option value="8000">$8,000</option>
-          <option value="6000">$6,000</option>
-          <option value="4000">$4,000</option>
-          <option value="2000">$2,000</option>
-        </select>
+        <Select
+          value={filters.career.value}
+          onChange={(e) => setFilters({ ...filters, price: e.value })}
+          components={animatedComponents}
+          options={costOptions}
+        />
       </div>
       <input
         type="submit"

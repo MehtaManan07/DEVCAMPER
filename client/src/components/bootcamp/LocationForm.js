@@ -22,6 +22,7 @@ const LocationForm = ({ showcase = false }) => {
       <div className="row">
         <div className="col-md-6">
           <div className="form-group">
+            <label> Miles From </label>
             <input
               value={dist}
               onChange={(e) => setDist(e.target.value)}
@@ -33,6 +34,7 @@ const LocationForm = ({ showcase = false }) => {
         </div>
         <div className="col-md-6">
           <div className="form-group">
+            <label> Zipcode </label>
             <input
               value={zip}
               onChange={(e) => setZip(e.target.value)}
@@ -45,7 +47,9 @@ const LocationForm = ({ showcase = false }) => {
       </div>
       <button
         onClick={onSubmitHandler}
-        className={`btn btn-block ${!showcase ? "btn-outline-primary" : 'btn-primary'}`}
+        className={`btn btn-block ${
+          !showcase ? "btn-outline-primary" : "btn-primary"
+        }`}
       >
         Find Bootcamps
       </button>
