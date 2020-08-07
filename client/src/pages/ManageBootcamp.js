@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useHistory } from "react-router-dom";
-import { getBootcamp, removeBootcamp } from "../redux/actions/Bootcamps";
+import {
+  getBootcamp,
+  removeBootcamp,
+  uploadImage,
+} from "../redux/actions/Bootcamps";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/core/Spinner";
 import ManageTop from "../components/bootcamp/ManageTop";
-import { Button } from "react-bootstrap";
+import { Button, Alert } from "react-bootstrap";
 
 const ManageBootcamp = () => {
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState({});
+  const [fileName, setFileName] = useState("Upload an image");
   const listBootcamps = useSelector((state) => state.listBootcamps);
   const { bootcamp, loading, error } = listBootcamps;
   const history = useHistory();
@@ -19,8 +24,16 @@ const ManageBootcamp = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(image,e)
-  }
+    const formData = new FormData()
+    formData.append("file", image)
+    console.log(typeof formData)
+    await dispatch(uploadImage(id,formData))
+  };
+
+  const changeHandler = (e) => {
+    setImage(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  };
 
   const deleteBootcamp = () => {
     alert("Are you sure? this can't be undone!!");
@@ -36,6 +49,8 @@ const ManageBootcamp = () => {
         <div className="row">
           <div className="col-md-8 m-auto">
             <div className="card bg-white py-2 px-4">
+              {error.length > 0 ? <Alert variant="danger"> {error.toString()} </Alert> : <></>}
+              {/* {error && <Alert variant="danger"> {error} </Alert>} */}
               <div className="card-body">
                 <h1 className="mb-4">Manage Bootcamp</h1>
                 <ManageTop bootcamp={bootcamp} />
@@ -44,19 +59,22 @@ const ManageBootcamp = () => {
                     <div className="custom-file">
                       <input
                         type="file"
-                        onChange={(e) => setImage(e.target.files[0].name)}
+                        onChange={changeHandler}
                         className="custom-file-input"
                         id="photo"
                       />
                       <label className="custom-file-label" htmlFor="photo">
-                        Add Bootcamp Image
+                        {fileName}
                       </label>
                     </div>
                   </div>
                   <Button
                     onClick={submitHandler}
                     className="btn-outline-dark btn-block"
-                  > Upload Photo </Button>
+                  >
+                    {" "}
+                    Upload Photo{" "}
+                  </Button>
                 </form>
                 <Link
                   to={`/update/bootcamp/${bootcamp._id}`}

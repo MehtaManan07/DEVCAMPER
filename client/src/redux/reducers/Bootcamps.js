@@ -17,6 +17,9 @@ import {
   REMOVE_BOOTCAMP_FAILURE,
   REMOVE_BOOTCAMP_REQUEST,
   REMOVE_BOOTCAMP_SUCCESS,
+  UPLOAD_IMAGE_REQUEST,
+  UPLOAD_IMAGE_SUCCESS,
+  UPLOAD_IMAGE_FAILURE,
 } from "../types";
 
 const initialState = {
@@ -37,6 +40,7 @@ export const getBootcampsReducer = (
     case CREATE_BOOTCAMP_REQUEST:
     case UPDATE_BOOTCAMP_REQUEST:
     case REMOVE_BOOTCAMP_REQUEST:
+    case UPLOAD_IMAGE_REQUEST:
       return { ...state, loading: true };
 
     case GET_BOOTCAMPS_SUCCESS:
@@ -46,6 +50,7 @@ export const getBootcampsReducer = (
     case CREATE_BOOTCAMP_SUCCESS:
     case UPDATE_BOOTCAMP_SUCCESS:
     case GET_BOOTCAMP_SUCCESS:
+    case UPLOAD_IMAGE_SUCCESS:
       return { ...state, loading: false, bootcamp: payload };
 
     case REMOVE_BOOTCAMP_SUCCESS:
@@ -62,6 +67,7 @@ export const getBootcampsReducer = (
     case CREATE_BOOTCAMP_FAILURE:
     case UPDATE_BOOTCAMP_FAILURE:
     case REMOVE_BOOTCAMP_FAILURE:
+    case UPLOAD_IMAGE_FAILURE:
       return { ...state, loading: false, error: payload };
 
     default:

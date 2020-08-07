@@ -7,11 +7,7 @@ import SingleBootcamp from "../components/bootcamp/allBootcamps/SingleBootcamp";
 import Loader from "../components/core/Spinner";
 
 const AllBootcamps = () => {
-  const [filters, setFilters] = useState({
-    career: "",
-    ratings: "",
-    price: ""
-  })
+  
   const listBootcamps = useSelector((state) => state.listBootcamps);
   const dispatch = useDispatch();
   const { bootcamps, loading } = listBootcamps;

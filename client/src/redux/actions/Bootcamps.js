@@ -18,6 +18,9 @@ import {
   REMOVE_BOOTCAMP_REQUEST,
   REMOVE_BOOTCAMP_SUCCESS,
   REMOVE_BOOTCAMP_FAILURE,
+  UPLOAD_IMAGE_REQUEST,
+  UPLOAD_IMAGE_SUCCESS,
+  UPLOAD_IMAGE_FAILURE,
 } from "../types";
 
 export const getBootcamps = (price,career) => async (dispatch) => {
@@ -109,7 +112,21 @@ export const removeBootcamp = (id) => async (dispatch) => {
     console.log(bootcamp);
     dispatch({ type: REMOVE_BOOTCAMP_SUCCESS, payload: id });
   } catch (error) {
-    const displayErr = error.response.data.error.split(",");
+    const displayErr = error.response.data.error
     dispatch({ type: REMOVE_BOOTCAMP_FAILURE, payload: displayErr });
+  }
+};
+
+export const uploadImage = (id,image) => async (dispatch) => {
+  dispatch({ type: UPLOAD_IMAGE_REQUEST });
+  try {
+    const bootcamp = await axios.put(`/api/v1/bootcamps/${id}/photo`,image, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    console.log(bootcamp);
+    dispatch({ type: UPLOAD_IMAGE_SUCCESS, payload: bootcamp.data.data });
+  } catch (error) {
+    const displayErr = error.response.data.error;
+    dispatch({ type: UPLOAD_IMAGE_FAILURE, payload: displayErr });
   }
 };
