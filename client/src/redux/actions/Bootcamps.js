@@ -20,10 +20,24 @@ import {
   REMOVE_BOOTCAMP_FAILURE,
 } from "../types";
 
-export const getBootcamps = () => async (dispatch) => {
+export const getBootcamps = (price,career) => async (dispatch) => {
   dispatch({ type: GET_BOOTCAMPS_REQUEST });
   try {
-    const bootcamps = await axios.get(`/api/v1/bootcamps`);
+    let url = `/api/v1/bootcamps/`;
+    if(career && price){
+      url = `/api/v1/bootcamps?careers[in]=${career}&averageCost[lte]=${price}`
+    }
+    
+    if(price && !career){
+      url = `/api/v1/bootcamps?averageCost[lte]=${price}`
+    }
+    
+    if(!price && career){
+      console.log('reached')
+      url = `/api/v1/bootcamps?careers[in]=${career}`
+    }
+
+    const bootcamps = await axios.get(url);
     console.log(bootcamps);
     dispatch({ type: GET_BOOTCAMPS_SUCCESS, payload: bootcamps.data.data });
   } catch (error) {
@@ -32,7 +46,6 @@ export const getBootcamps = () => async (dispatch) => {
     dispatch({ type: GET_BOOTCAMPS_FAILURE, payload: displayErr });
   }
 };
-
 export const getBootcamp = (id) => async (dispatch) => {
   dispatch({ type: GET_BOOTCAMP_REQUEST });
   try {

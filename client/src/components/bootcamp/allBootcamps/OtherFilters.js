@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import Select from "react-select";
+import { Button } from "react-bootstrap";
 import makeAnimated from "react-select/animated";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getBootcamps } from "../../../redux/actions/Bootcamps";
 
 const OtherFilters = () => {
   const [filters, setFilters] = useState({
@@ -8,6 +12,8 @@ const OtherFilters = () => {
     ratings: "",
     price: "",
   });
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const animatedComponents = makeAnimated();
   const CareerOptions = [
@@ -27,6 +33,12 @@ const OtherFilters = () => {
     { value: "4000", label: "$4000" },
     { value: "2000", label: "$2000" },
   ];
+
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    dispatch(getBootcamps(filters.price, filters.career));
+    setFilters({ career: "", price: "" });
+  };
 
   return (
     <form>
@@ -69,11 +81,9 @@ const OtherFilters = () => {
           options={costOptions}
         />
       </div>
-      <input
-        type="submit"
-        value="Find Bootcamps"
-        className="btn btn-primary btn-block"
-      />
+      <Button block variant="outline-primary" onClick={onSubmitHandler}>
+        Find Bootcamps
+      </Button>
     </form>
   );
 };
