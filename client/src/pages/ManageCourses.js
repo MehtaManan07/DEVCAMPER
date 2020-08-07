@@ -4,20 +4,24 @@ import { getBootcamp } from "../redux/actions/Bootcamps";
 import { useHistory, Link, useParams } from "react-router-dom";
 import ManageTop from "../components/bootcamp/ManageTop";
 import Loader from "../components/core/Spinner";
+import { removeCourse } from "../redux/actions/Courses";
 
 const ManageCourses = () => {
   const history = useHistory();
   const { id } = useParams();
   const listBootcamps = useSelector((state) => state.listBootcamps);
-  const { bootcamp, loading, eroror } = listBootcamps;
+  const { bootcamp, loading } = listBootcamps;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBootcamp(id));
+    // eslint-disable-next-line
   }, []);
 
-  const deleteCourse = (id) => {
-    alert(id)
-  }
+  const deleteCourse = async (courseId) => {
+    alert("Are you sure? This cannot be undone...");
+    await dispatch(removeCourse(courseId));
+    await dispatch(getBootcamp(id))
+  };
 
   return (
     <section className="container mt-5">

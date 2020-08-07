@@ -12,10 +12,13 @@ const advancedResults = require("../middlewares/advancedResults");
 
 router
   .route("/")
-  .get(advancedResults(Course,{
+  .get(
+    advancedResults(Course, {
       path: "bootcamp",
-      select: "name description"
-  }), getCourses)
+      select: "name description",
+    }),
+    getCourses
+  )
   .post(addCourse);
 router.route("/:id").get(getCourse).put(updateCourse).delete(deleteCourse);
 
