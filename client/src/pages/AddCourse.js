@@ -38,7 +38,7 @@ const AddCourse = () => {
           <div className="card bg-white py-2 px-4">
             <div className="card-body">
               <span
-                onClick={() => history.goBack()}
+                onClick={() => history.push(`/manage/courses/${id}`)}
                 style={{ cursor: "pointer" }}
                 className="btn btn-link text-secondary my-3"
               >

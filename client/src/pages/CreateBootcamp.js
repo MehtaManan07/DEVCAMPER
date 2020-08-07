@@ -36,11 +36,7 @@ const CreateBootcamp = () => {
       <p>
         Important: You must be affiliated with a bootcamp to add to DevCamper
       </p>
-      {error.length > 0 ? (
-        <Alert variant="danger"> {error && error[0]} </Alert>
-      ) : (
-        <></>
-      )}
+      {error.length > 0 && <Alert variant="danger"> {error[0]} </Alert>}
       <BootcampForm
         values={values}
         loading={loading}

@@ -52,18 +52,14 @@ const UpdateBootcamp = () => {
 
     // eslint-disable-next-line
   }, []);
-
+console.log(error[0])
   return (
     <section className="container mt-5">
-      <h1 className="mb-2">Add Bootcamp</h1>
+      <h1 className="mb-2">Update Bootcamp</h1>
       <p>
         Important: You must be affiliated with a bootcamp to add to DevCamper
       </p>
-      {error.length > 0 ? setTimeout(() => (
-        <Alert variant="danger"> {error && error[0]} </Alert>
-      ),3000): (
-        <></>
-      )}
+      {error.length > 0 && <Alert variant="danger"> {error[0]} </Alert>}
       <BootcampForm
         values={values}
         loading={loading}

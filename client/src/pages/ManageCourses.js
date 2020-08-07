@@ -34,7 +34,7 @@ const ManageCourses = () => {
               <div className="card-body">
                 <span
                   style={{ cursor: "pointer" }}
-                  onClick={() => history.goBack()}
+                  onClick={() => history.push(`/manage/bootcamp/${id}`)}
                   className="btn btn-link text-secondary my-3"
                 >
                   <i className="fas fa-chevron-left"></i> Manage Bootcamp
