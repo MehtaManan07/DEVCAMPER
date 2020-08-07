@@ -52,7 +52,7 @@ const UpdateBootcamp = () => {
 
     // eslint-disable-next-line
   }, []);
-console.log(error[0])
+  
   return (
     <section className="container mt-5">
       <h1 className="mb-2">Update Bootcamp</h1>
