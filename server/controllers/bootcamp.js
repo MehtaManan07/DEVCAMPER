@@ -1,5 +1,7 @@
 const Bootcamp = require("../models/Bootcamp");
 const ErrorResponse = require("../utils/errorRes");
+const formidable = require("formidable");
+const fs = require("fs");
 const path = require("path")
 const asyncHandler = require("../middlewares/async");
 const geocoder = require("../utils/geocoder");
@@ -117,7 +119,6 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`Bootcamp not found with id: ${req.params.id}`, 400)
     );
   }
-  console.log(req)
   if (!req.files) {
     return next(new ErrorResponse(`Please upload a file`, 400));
   }
@@ -128,7 +129,7 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
   }
   // Check size
   if (file.size > process.env.MAX_FILE_UPLOAD) {
-    return next(new ErrorResponse(`Make sure the size is less than 2 mb`, 400));
+    return next(new ErrorResponse(`Make sure the size is less than 1 megabytes`, 400));
   }
   // Custom file name
   file.name = `photo_${bootcamp._id}_${new Date().getTime()}${path.parse(file.name).ext}`
@@ -143,3 +144,34 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
     return res.status(200).json({ success: true, data: bootcamp })
   })
 });
+
+exports.create = (req,res) => {
+  let form = new formidable.IncomingForm();
+  form.keepExtensions = true;
+  form.parse(req, (error, fields, files) => {
+    if (error) {
+      return res.status(400).json({
+        error: "Image cannot not be uploaded",
+      });
+    }
+
+    let bootcamp = new Bootcamp(fields)
+
+    if (files.photo) {
+      if (files.photo.size > 10 ** 6) {
+        console.log("poicha bhai")
+        // return next(new ErrorResponse(`Make sure the size is less than 1 megabytes`, 400));
+      }
+      bootcamp.photo.data = fs.readFileSync(files.photo.path);
+      bootcamp.photo.contentType = files.photo.type;
+    }
+
+    bootcamp.save((error, result) => {
+      if (error) {
+        console.log(error);
+        // return next(new ErrorResponse(`Server error while uploading image`, 500));
+      }
+      res.json(result);
+    });
+  });  
+}

@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === "development") {
 app.use(fileupload())
 
 // Set static folder
-app.use(express.static(path.join(`${__dirname}\server`, 'public')))
+app.use(express.static(path.join(`${__dirname}/client/src/`, 'public')))
 
 app.use("/api/v1/bootcamps", require("./server/routes/bootcamps"));
 app.use("/api/v1/courses", require("./server/routes/courses"));
