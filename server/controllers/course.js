@@ -9,18 +9,14 @@ const asyncHandler = require("../middlewares/async");
 // @access    Private
 
 exports.getCourses = asyncHandler(async (req, res, next) => {
-  let query;
   if (req.params.bootcampId) {
-    query = Course.find({ bootcamp: req.params.bootcampId });
+    const courses = await Course.find({ bootcamp: req.params.bootcampId });
+    return res
+      .status(200)
+      .json({ success: true, count: courses.length, data: courses });
   } else {
-    query = Course.find().populate("bootcamp", "name description");
+    res.status(200).json(res.advancedResults)
   }
-  const courses = await query;
-  res.status(200).json({
-    success: true,
-    count: courses.length,
-    data: courses,
-  });
 });
 
 // @desc      Get single courses
@@ -91,6 +87,6 @@ exports.deleteCourse = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`No course found with id ${req.params.id}`, 404)
     );
   }
-  await course.remove()
+  await course.remove();
   res.status(200).json({ success: true, data: course });
 });
