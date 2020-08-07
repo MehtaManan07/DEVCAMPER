@@ -1,25 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { getBootcamp, removeBootcamp } from "../redux/actions/Bootcamps";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/core/Spinner";
 import ManageTop from "../components/bootcamp/ManageTop";
+import { Button } from "react-bootstrap";
 
 const ManageBootcamp = () => {
+  const [image, setImage] = useState("");
   const listBootcamps = useSelector((state) => state.listBootcamps);
   const { bootcamp, loading, error } = listBootcamps;
-  const history = useHistory()
+  const history = useHistory();
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBootcamp(id));
   }, []);
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    console.log(image,e)
+  }
+
   const deleteBootcamp = () => {
     alert("Are you sure? this can't be undone!!");
-    dispatch(removeBootcamp(id))
-    history.push('/all/bootcamps')
-  }
+    dispatch(removeBootcamp(id));
+    history.push("/all/bootcamps");
+  };
 
   return (
     <section className="container mt-5">
@@ -31,13 +38,13 @@ const ManageBootcamp = () => {
             <div className="card bg-white py-2 px-4">
               <div className="card-body">
                 <h1 className="mb-4">Manage Bootcamp</h1>
-               <ManageTop bootcamp={bootcamp} />
+                <ManageTop bootcamp={bootcamp} />
                 <form className="mb-4">
                   <div className="form-group">
                     <div className="custom-file">
                       <input
                         type="file"
-                        name="photo"
+                        onChange={(e) => setImage(e.target.files[0].name)}
                         className="custom-file-input"
                         id="photo"
                       />
@@ -46,22 +53,31 @@ const ManageBootcamp = () => {
                       </label>
                     </div>
                   </div>
-                  <input
-                    type="submit"
-                    className="btn btn-light btn-block"
-                    value="Upload Image"
-                  />
+                  <Button
+                    onClick={submitHandler}
+                    className="btn-outline-dark btn-block"
+                  > Upload Photo </Button>
                 </form>
-                <Link to={`/update/bootcamp/${bootcamp._id}`} className="btn btn-primary btn-block">
+                <Link
+                  to={`/update/bootcamp/${bootcamp._id}`}
+                  className="btn btn-primary btn-block"
+                >
                   Edit Bootcamp Details
                 </Link>
                 <Link
-                  to={{ pathname: `/manage/courses/${bootcamp._id}`, state: bootcamp }}
+                  to={{
+                    pathname: `/manage/courses/${bootcamp._id}`,
+                    state: bootcamp,
+                  }}
                   className="btn btn-secondary btn-block"
                 >
                   Manage Courses
                 </Link>
-                <span style={{ cursor: "pointer" }} onClick={() => deleteBootcamp()} className="btn btn-danger btn-block">
+                <span
+                  style={{ cursor: "pointer" }}
+                  onClick={() => deleteBootcamp()}
+                  className="btn btn-danger btn-block"
+                >
                   Remove Bootcamp
                 </span>
                 <p className="text-muted mt-5">
