@@ -67,8 +67,6 @@ const Bootcamp = () => {
                 <i className="fas fa-globe"></i> Visit Website
               </a>
               <Link className="btn btn-success btn-block my-3" to={`/manage/bootcamp/${bootcamp._id}`}> Manage Bootcamp </Link>
-              {/* <!-- Map --> */}
-              <div id="map" style={{ width: "100%", height: "300px" }}></div>
               {/* <!-- Perks --> */}
               <ul className="list-group list-group-flush mt-1">
                 <li className="list-group-item">
@@ -84,6 +82,8 @@ const Bootcamp = () => {
                   <i className={bootcamp.acceptGi ? tick : cross}></i> Accepts GI Bill
                 </li>
               </ul>
+              {/* <!-- Map --> */}
+              <div id="map" style={{ width: "100%", height: "300px" }}></div>
             </div>
           </div>
         </div>
