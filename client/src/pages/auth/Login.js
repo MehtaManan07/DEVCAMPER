@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link, useHistory, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../redux/actions/Users";
@@ -7,6 +7,7 @@ const Login = () => {
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
   const [values, setValues] = useState({
     password: "",
     email: "",
@@ -18,8 +19,8 @@ const Login = () => {
     e.preventDefault();
     await dispatch(loginUser(values));
   };
-  if(user.isAuth) {
-    return <Redirect to="/all/bootcamps" />
+  if (user.isAuth) {
+    return <Redirect to="/all/bootcamps" />;
   }
 
   return (
@@ -50,28 +51,37 @@ const Login = () => {
                   </div>
                   <div className="form-group mb-4">
                     <label htmlFor="password">Password</label>
-                    <input
-                      type="password"
-                      value={values.password}
-                      onChange={onChangeHandler("password")}
-                      className="form-control"
-                      placeholder="Enter password"
-                      required
-                    />
+                    <div className="input-group">
+                      <input
+                        type={show ? "text" : "password"}
+                        value={values.password}
+                        onChange={onChangeHandler("password")}
+                        className="form-control"
+                        placeholder="Enter password"
+                        required
+                      />
+                      <div className="input-group-append">
+                        <button
+                          type="button"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => setShow(!show)}
+                          className="fa fa-eye"
+                        ></button>
+                      </div>
+                    </div>
                   </div>
                   <div className="form-group">
                     <button
                       onClick={onSubmitHandler}
                       className="btn btn-primary btn-block"
                     >
-                      {" "}
-                      Login{" "}
+                      Login
                     </button>
                   </div>
                 </form>
                 <p>
                   Forgot Password?
-                  <Link to="/reset-password">Reset Password</Link>
+                  <Link to="/reset-password">Reset</Link>
                 </p>
               </div>
             </div>

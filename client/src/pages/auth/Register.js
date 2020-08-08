@@ -8,6 +8,7 @@ const Register = () => {
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const dispatch = useDispatch();
+  const [show, setShow] = useState(false)
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -74,15 +75,24 @@ const Register = () => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Password</label>
+                    <div className="input-group">
                     <input
-                      type="password"
+                      type={show ? "text" : "password"}
                       value={values.password}
                       onChange={onChangeHandler("password")}
-                      name="password"
                       className="form-control"
                       placeholder="Enter password"
                       required
                     />
+                    <div className="input-group-append">
+                        <button
+                          type="button"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => setShow(!show)}
+                          className="fa fa-eye"
+                        ></button>
+                      </div>
+                    </div>
                   </div>
                   <div className="form-group mb-4">
                     <label htmlFor="password2">Confirm Password</label>
