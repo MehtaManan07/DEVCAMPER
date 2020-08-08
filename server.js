@@ -30,13 +30,14 @@ app.use(express.static(path.join(`${__dirname}/client/src/`, 'public')))
 
 app.use("/api/v1/bootcamps", require("./server/routes/bootcamps"));
 app.use("/api/v1/courses", require("./server/routes/courses"));
+app.use("/api/v1/auth", require("./server/routes/auth"));
 app.use(errorHandler)
 
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 const server = app.listen(
-  PORT,
+  port,
   console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.blue.bold
+    `Server running in ${process.env.NODE_ENV} mode on port ${port}`.blue.bold
   )
 );
 
