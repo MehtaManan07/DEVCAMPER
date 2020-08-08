@@ -11,8 +11,16 @@ import ManageBootcamp from './pages/bootcamps/ManageBootcamp';
 import ManageCourses from './pages/courses/ManageCourses';
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
+import { useEffect } from 'react';
+import store from './redux/store';
+import { fetchUser } from './redux/actions/Users';
 
 function App() {
+  useEffect(() => {
+    if(localStorage.DevCamper) {
+      store.dispatch(fetchUser())
+    }
+  },[])
   return (
     <div>
     <NavbarComponent />
