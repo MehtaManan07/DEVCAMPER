@@ -52,3 +52,12 @@ const sendTokenResponse = (user,statusCode,res) => {
    console.log(options.expires)
    res.status(statusCode).cookie('token',token,options).json({ success: true, token })
 }
+
+// @desc      Get user by Id
+// @route     POST /api/v1/auth/me
+// @access    Private
+
+exports.getMe = () => {
+  
+}
+

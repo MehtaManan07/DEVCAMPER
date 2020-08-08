@@ -47,7 +47,7 @@ exports.getBootcampById = asyncHandler(async (req, res, next) => {
 
 // @desc      UPDATE bootcamp by Id
 // @route     PUT /api/v1/bootcamps/:id
-// @access    Public
+// @access    Private
 
 exports.updateBootcampById = asyncHandler(async (req, res, next) => {
   const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
@@ -68,7 +68,7 @@ exports.updateBootcampById = asyncHandler(async (req, res, next) => {
 
 // @desc      Delete bootcamp by Id
 // @route     DELETE /api/v1/bootcamps/:id
-// @access    Public
+// @access    Private
 
 exports.deleteBootcampById = asyncHandler(async (req, res, next) => {
   const bootcamp = await Bootcamp.findById(req.params.id);
@@ -109,7 +109,7 @@ exports.getBootcampsInRadius = asyncHandler(async (req, res, next) => {
 
 // @desc      Upload photo for a bootcamp
 // @route     POST /api/v1/bootcamps/:id/photo
-// @access    Public
+// @access    Private
 
 exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
   const bootcamp = await Bootcamp.findById(req.params.id);

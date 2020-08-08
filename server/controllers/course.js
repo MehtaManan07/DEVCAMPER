@@ -6,7 +6,7 @@ const asyncHandler = require("../middlewares/async");
 // @desc      Get courses
 // @route     POST /api/v1/courses
 // @route     POST /api/v1/bootcamps/:bootcampId/courses
-// @access    Private
+// @access    Public
 
 exports.getCourses = asyncHandler(async (req, res, next) => {
   if (req.params.bootcampId) {
@@ -21,7 +21,7 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
 
 // @desc      Get single courses
 // @route     POST /api/v1/courses/:id
-// @access    Private
+// @access    Public
 
 exports.getCourse = asyncHandler(async (req, res, next) => {
   const course = await Course.findById(req.params.id).populate(
