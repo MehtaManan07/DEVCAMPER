@@ -42,7 +42,6 @@ const OtherFilters = () => {
 
   return (
     <form>
-      {JSON.stringify(filters)}
       <div className="form-group">
         <label>Careers</label>
         <Select

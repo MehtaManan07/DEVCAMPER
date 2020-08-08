@@ -28,6 +28,8 @@ const ManageBootcamp = () => {
     formData.append("file", image)
     console.log(typeof formData)
     await dispatch(uploadImage(id,formData))
+    await setFileName('')
+    await dispatch(getBootcamp(id))
   };
 
   const changeHandler = (e) => {
