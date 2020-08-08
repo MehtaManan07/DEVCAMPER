@@ -12,7 +12,7 @@ exports.register = asyncHandler(async (req, res, next) => {
   // Create a user
   const user = await User.create({ name, email, password, role });
 
-  sendTokenResponse(user,200,res)
+  sendTokenResponse(user, 200, res);
 });
 
 // @desc      Login user
@@ -23,41 +23,45 @@ exports.login = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
 
   // validate password and email
-  if(!email || !password) {
-    return next(new ErrorResponse('Please add an email and a password',400))
+  if (!email || !password) {
+    return next(new ErrorResponse("Please add an email and a password", 400));
   }
 
   // check for user
-  const user = await User.findOne({ email }).select('+password');
-  if(!user) {
-    return next(new ErrorResponse('Invalid credentials',401))
+  const user = await User.findOne({ email }).select("+password");
+  if (!user) {
+    return next(new ErrorResponse("Invalid credentials", 401));
   }
   // Check if password matches
   const isMatch = await user.matchPassword(password);
 
-  if(!isMatch) return next(new ErrorResponse('Invalid credentials',401))
+  if (!isMatch) return next(new ErrorResponse("Invalid credentials", 401));
 
-  sendTokenResponse(user,200,res)
+  sendTokenResponse(user, 200, res);
 });
 
 // get token from model, create cookie and send res;
-const sendTokenResponse = (user,statusCode,res) => {
-   // create token;
-   const token = user.getSignedJwtToken();
+const sendTokenResponse = (user, statusCode, res) => {
+  // create token;
+  const token = user.getSignedJwtToken();
 
-   const options = {
-     expires: new Date(Date.now() + 30*24*3600*1000),
-     httpOnly: true
-   }
-   console.log(options.expires)
-   res.status(statusCode).cookie('token',token,options).json({ success: true, token })
-}
+  const options = {
+    expires: new Date(Date.now() + 30 * 24 * 3600 * 1000),
+    httpOnly: true,
+  };
+  console.log(options.expires);
+  res
+    .status(statusCode)
+    .cookie("token", token, options)
+    .json({ success: true, token });
+};
 
 // @desc      Get user by Id
 // @route     POST /api/v1/auth/me
 // @access    Private
 
-exports.getMe = () => {
-  
-}
+exports.getMe = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
 
+  res.status(200).json({ success: true, data: user });
+});
