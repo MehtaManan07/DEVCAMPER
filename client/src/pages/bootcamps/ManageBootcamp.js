@@ -4,10 +4,10 @@ import {
   getBootcamp,
   removeBootcamp,
   uploadImage,
-} from "../redux/actions/Bootcamps";
+} from "../../redux/actions/Bootcamps";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../components/core/Spinner";
-import ManageTop from "../components/bootcamp/ManageTop";
+import Loader from "../../components/core/Spinner";
+import ManageTop from "../../components/bootcamp/ManageTop";
 import { Button, Alert } from "react-bootstrap";
 
 const ManageBootcamp = () => {

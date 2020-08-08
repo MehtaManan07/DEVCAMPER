@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { createBootcamp } from "../redux/actions/Bootcamps";
-import BootcampForm from "../components/bootcamp/BootcampForm";
+import { createBootcamp } from "../../redux/actions/Bootcamps";
+import BootcampForm from "../../components/bootcamp/BootcampForm";
 import { useHistory } from "react-router-dom";
 
 const CreateBootcamp = () => {

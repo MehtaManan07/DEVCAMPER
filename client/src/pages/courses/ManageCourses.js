@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBootcamp } from "../redux/actions/Bootcamps";
+import { getBootcamp } from "../../redux/actions/Bootcamps";
 import { useHistory, Link, useParams } from "react-router-dom";
-import ManageTop from "../components/bootcamp/ManageTop";
-import Loader from "../components/core/Spinner";
-import { removeCourse } from "../redux/actions/Courses";
+import ManageTop from "../../components/bootcamp/ManageTop";
+import Loader from "../../components/core/Spinner";
+import { removeCourse } from "../../redux/actions/Courses";
 
 const ManageCourses = () => {
   const history = useHistory();

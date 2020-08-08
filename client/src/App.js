@@ -1,14 +1,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import NavbarComponent from './components/core/Navbar';
-import Landing from './pages/Landing';
-import AllBootcamps from './pages/AllBootcamps';
-import CreateBootcamp from './pages/CreateBootcamp';
-import AddCourse from './pages/AddCourse';
-import Bootcamp from './pages/Bootcamp';
-import UpdateBootcamp from './pages/UpdateBootcamp';
-import ManageBootcamp from './pages/ManageBootcamp';
-import ManageCourses from './pages/ManageCourses';
+import Landing from './pages/core/Landing';
+import AllBootcamps from './pages/bootcamps/AllBootcamps';
+import CreateBootcamp from './pages/bootcamps/CreateBootcamp';
+import AddCourse from './pages/courses/AddCourse';
+import Bootcamp from './pages/bootcamps/Bootcamp';
+import UpdateBootcamp from './pages/bootcamps/UpdateBootcamp';
+import ManageBootcamp from './pages/bootcamps/ManageBootcamp';
+import ManageCourses from './pages/courses/ManageCourses';
 
 function App() {
   return (

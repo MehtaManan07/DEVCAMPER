@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useParams, useHistory, useLocation } from "react-router-dom";
-import CourseForm from "../components/courses/CourseForm";
 import { useDispatch } from 'react-redux'
-import { addCourse } from "../redux/actions/Courses";
+import { addCourse } from '../../redux/actions/Courses'
+import CourseForm from '../../components/courses/CourseForm'
 
 const AddCourse = () => {
   const [values, setValues] = useState({

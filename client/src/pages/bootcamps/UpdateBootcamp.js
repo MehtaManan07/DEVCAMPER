@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import BootcampForm from "../components/bootcamp/BootcampForm";
+import BootcampForm from "../../components/bootcamp/BootcampForm";
 import { useParams } from "react-router-dom";
-import { updateBootcamp, getBootcamp } from "../redux/actions/Bootcamps";
+import { updateBootcamp, getBootcamp } from "../../redux/actions/Bootcamps";
 
 const UpdateBootcamp = () => {
   const { id } = useParams();

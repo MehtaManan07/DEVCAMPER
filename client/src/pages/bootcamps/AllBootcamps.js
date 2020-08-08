@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getBootcamps } from "../redux/actions/Bootcamps";
-import LocationFilter from "../components/bootcamp/allBootcamps/LocationFilter";
-import OtherFilters from "../components/bootcamp/allBootcamps/OtherFilters";
-import SingleBootcamp from "../components/bootcamp/allBootcamps/SingleBootcamp";
-import Loader from "../components/core/Spinner";
+import { getBootcamps } from "../../redux/actions/Bootcamps";
+import LocationFilter from "../../components/bootcamp/allBootcamps/LocationFilter";
+import OtherFilters from "../../components/bootcamp/allBootcamps/OtherFilters";
+import SingleBootcamp from "../../components/bootcamp/allBootcamps/SingleBootcamp";
+import Loader from "../../components/core/Spinner";
 
 const AllBootcamps = () => {
   const listBootcamps = useSelector((state) => state.listBootcamps);

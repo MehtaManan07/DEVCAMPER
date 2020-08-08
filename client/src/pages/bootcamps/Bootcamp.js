@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getBootcamp } from "../redux/actions/Bootcamps";
-import Loader from "../components/core/Spinner";
-import BootcampCourse from "../components/bootcamp/BootcampCourse";
+import { getBootcamp } from "../../redux/actions/Bootcamps";
+import Loader from "../../components/core/Spinner";
+import BootcampCourse from "../../components/bootcamp/BootcampCourse";
 
 const Bootcamp = () => {
   const listBootcamps = useSelector((state) => state.listBootcamps);
