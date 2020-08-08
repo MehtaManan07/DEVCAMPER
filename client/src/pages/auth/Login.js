@@ -1,65 +1,72 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import React, {useState} from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser } from "../../redux/actions/Users";
 
 const Login = () => {
-    const [values, setValues] = useState({
-        password: "",
-        email: "",
-    })
-    const onChangeHandler = name => event => {
-        setValues({ ...values, [name]: event.target.value })
-    }
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        console.log(values)
-    }
+  const user = useSelector((state) => state.user);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const [values, setValues] = useState({
+    password: "",
+    email: "",
+  });
+  const onChangeHandler = (name) => (event) => {
+    setValues({ ...values, [name]: event.target.value });
+  };
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    await dispatch(loginUser(values));
+  };
   return (
-    <section class="form mt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 m-auto">
-            <div class="card bg-white p-4 mb-4">
-              <div class="card-body">
+    <section className="form mt-5">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6 m-auto">
+            <div className="card bg-white p-4 mb-4">
+              <div className="card-body">
                 <h1>
-                  <i class="fas fa-sign-in-alt"></i> Login
+                  <i className="fas fa-sign-in-alt"></i> Login
                 </h1>
                 <p>
                   Log in to list your bootcamp or rate, review and favorite
                   bootcamps
                 </p>
                 <form>
-                  <div class="form-group">
-                    <label for="email">Email Address</label>
+                  <div className="form-group">
+                    <label htmlFor="email">Email Address</label>
                     <input
                       type="email"
                       value={values.email}
                       onChange={onChangeHandler("email")}
-                      class="form-control"
+                      className="form-control"
                       placeholder="Enter email"
                       required
                     />
                   </div>
-                  <div class="form-group mb-4">
-                    <label for="password">Password</label>
+                  <div className="form-group mb-4">
+                    <label htmlFor="password">Password</label>
                     <input
                       type="password"
                       value={values.password}
                       onChange={onChangeHandler("password")}
-                      class="form-control"
+                      className="form-control"
                       placeholder="Enter password"
                       required
                     />
                   </div>
-                  <div class="form-group">
+                  <div className="form-group">
                     <button
                       onClick={onSubmitHandler}
-                      class="btn btn-primary btn-block"
-                    > Login </button>
+                      className="btn btn-primary btn-block"
+                    >
+                      {" "}
+                      Login{" "}
+                    </button>
                   </div>
                 </form>
-                <p>                  
-                 Forgot Password?
+                <p>
+                  Forgot Password?
                   <Link to="/reset-password">Reset Password</Link>
                 </p>
               </div>
