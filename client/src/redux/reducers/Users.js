@@ -6,18 +6,19 @@ import {
 
 const initialState = {
   user: {},
+  isAuth: null,
+  error:{},
   token: "",
-  error:{}
 };
 
 export const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case USER_REGISTER_REQUEST:
-      return { ...state, loading: true };
+      return { ...state, loading: true, isAuth: false };
     case USER_REGISTER_SUCCESS:
-      return { ...state, token: payload };
+      return { ...state, isAuth: true, token: payload };
     case USER_REGISTER_FAILURE:
-      return { ...state, error: payload };
+      return { ...state, error: payload, isAuth: false };
     default:
       return state;
   }

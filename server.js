@@ -1,8 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const colors = require("colors");
-const path = require('path');
-const fileupload = require('express-fileupload')
+const path = require("path");
+const fileupload = require("express-fileupload");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 
@@ -14,10 +14,10 @@ const errorHandler = require("./server/middlewares/error"); // error handler imp
 const app = express();
 
 //body-parser
-app.use(express.json())
+app.use(express.json());
 
 //cookie-parser
-app.use(cookieParser())
+app.use(cookieParser());
 
 connectDB();
 
@@ -27,15 +27,15 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // File uploading
-app.use(fileupload())
+app.use(fileupload());
 
 // Set static folder
-app.use(express.static(path.join(`${__dirname}/client/src/`, 'public')))
+app.use(express.static(path.join(`${__dirname}/client/src/`, "public")));
 
 app.use("/api/v1/bootcamps", require("./server/routes/bootcamps"));
 app.use("/api/v1/courses", require("./server/routes/courses"));
 app.use("/api/v1/auth", require("./server/routes/auth"));
-app.use(errorHandler)
+app.use(errorHandler);
 
 const port = process.env.PORT || 5000;
 const server = app.listen(
