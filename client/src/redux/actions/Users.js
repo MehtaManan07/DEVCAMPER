@@ -13,9 +13,8 @@ export const registerUser = (data) => async (dispatch) => {
     const response = await axios.post(`/api/v1/auth/register`, data, {
       headers: { "Content-Type": "application/json" },
     });
-    const cookieToken = Cookies.get('token')
-    console.log(cookieToken)
-    dispatch({ type: USER_REGISTER_SUCCESS, payload: cookieToken });
+    console.log(response.data)
+    dispatch({ type: USER_REGISTER_SUCCESS, payload: response.data.data });
   } catch (error) {
     console.log(error.response.data);
     const displayErr = error.response.data.error.split(",");
