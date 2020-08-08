@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../redux/actions/Users";
 
@@ -18,6 +18,10 @@ const Login = () => {
     e.preventDefault();
     await dispatch(loginUser(values));
   };
+  if(user.isAuth) {
+    return <Redirect to="/all/bootcamps" />
+  }
+
   return (
     <section className="form mt-5">
       <div className="container">
