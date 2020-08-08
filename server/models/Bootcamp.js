@@ -102,6 +102,10 @@ const BootCampSchema = new schema(
       type: Date,
       default: Date.now,
     },
+    pic: {
+      type: Buffer,
+      contentType: String
+    }
   },
   {
     toJSON: { virtuals: true },

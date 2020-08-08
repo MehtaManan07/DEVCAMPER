@@ -1,8 +1,8 @@
 const Bootcamp = require("../models/Bootcamp");
 const ErrorResponse = require("../utils/errorRes");
-const formidable = require("formidable");
-const fs = require("fs");
 const path = require("path")
+const fs = require('fs');
+const formidable = require('formidable');
 const asyncHandler = require("../middlewares/async");
 const geocoder = require("../utils/geocoder");
 
@@ -123,6 +123,7 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Please upload a file`, 400));
   }
   const file = req.files.file;
+  console.log(file)
   // Make sure it's a photo
   if (!file.mimetype.startsWith("image")) {
     return next(new ErrorResponse(`Make sure it is an image`, 400));
@@ -145,33 +146,6 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
   })
 });
 
-exports.create = (req,res) => {
-  let form = new formidable.IncomingForm();
-  form.keepExtensions = true;
-  form.parse(req, (error, fields, files) => {
-    if (error) {
-      return res.status(400).json({
-        error: "Image cannot not be uploaded",
-      });
-    }
-
-    let bootcamp = new Bootcamp(fields)
-
-    if (files.photo) {
-      if (files.photo.size > 10 ** 6) {
-        console.log("poicha bhai")
-        // return next(new ErrorResponse(`Make sure the size is less than 1 megabytes`, 400));
-      }
-      bootcamp.photo.data = fs.readFileSync(files.photo.path);
-      bootcamp.photo.contentType = files.photo.type;
-    }
-
-    bootcamp.save((error, result) => {
-      if (error) {
-        console.log(error);
-        // return next(new ErrorResponse(`Server error while uploading image`, 500));
-      }
-      res.json(result);
-    });
-  });  
-}
+exports.create = asyncHandler(async (req,res) => {
+  res.json(req)
+})
