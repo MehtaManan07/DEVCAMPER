@@ -24,12 +24,12 @@ const ManageBootcamp = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const formData = new FormData()
-    formData.append("file", image)
-    console.log(typeof formData)
-    await dispatch(uploadImage(id,formData))
-    await setFileName('')
-    await dispatch(getBootcamp(id))
+    const formData = new FormData();
+    formData.append("file", image);
+    console.log(typeof formData);
+    await dispatch(uploadImage(id, formData));
+    await setFileName("");
+    await dispatch(getBootcamp(id));
   };
 
   const changeHandler = (e) => {
@@ -37,10 +37,10 @@ const ManageBootcamp = () => {
     setFileName(e.target.files[0].name);
   };
 
-  const deleteBootcamp = () => {
+  const deleteBootcamp = async () => {
     alert("Are you sure? this can't be undone!!");
-    dispatch(removeBootcamp(id));
-    history.push("/all/bootcamps");
+    await dispatch(removeBootcamp(id));
+    await history.push("/all/bootcamps");
   };
 
   return (
@@ -51,7 +51,11 @@ const ManageBootcamp = () => {
         <div className="row">
           <div className="col-md-8 m-auto">
             <div className="card bg-white py-2 px-4">
-              {error.length > 0 ? <Alert variant="danger"> {error.toString()} </Alert> : <></>}
+              {error.length > 0 ? (
+                <Alert variant="danger"> {error.toString()} </Alert>
+              ) : (
+                <></>
+              )}
               {/* {error && <Alert variant="danger"> {error} </Alert>} */}
               <div className="card-body">
                 <h1 className="mb-4">Manage Bootcamp</h1>

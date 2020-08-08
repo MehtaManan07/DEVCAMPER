@@ -3,6 +3,7 @@ import { Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createBootcamp } from "../redux/actions/Bootcamps";
 import BootcampForm from "../components/bootcamp/BootcampForm";
+import { useHistory } from "react-router-dom";
 
 const CreateBootcamp = () => {
   const [values, setValues] = useState({
@@ -19,7 +20,7 @@ const CreateBootcamp = () => {
     acceptGi: false,
   });
   const [tempCareers, setTempCareers] = useState([]);
-  
+  const history = useHistory();
   const dispatch = useDispatch();
   const listBootcamps = useSelector((state) => state.listBootcamps);
   const { loading, error } = listBootcamps;
@@ -30,10 +31,14 @@ const CreateBootcamp = () => {
     setValues({ ...values, careers: careerss });
     console.log(values);
     await dispatch(createBootcamp(values));
+    error === {} && history.push("/");
   };
+
+  console.log(error,error.length)
   return (
     <section className="container mt-5">
       <h1 className="mb-2">Add Bootcamp</h1>
+      {JSON.stringify(error.length)}
       <p>
         Important: You must be affiliated with a bootcamp to add to DevCamper
       </p>

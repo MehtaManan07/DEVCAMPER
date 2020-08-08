@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { Button } from "react-bootstrap";
 import makeAnimated from "react-select/animated";
-import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getBootcamps } from "../../../redux/actions/Bootcamps";
 
@@ -12,7 +11,6 @@ const OtherFilters = () => {
     ratings: "",
     price: "",
   });
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const animatedComponents = makeAnimated();
