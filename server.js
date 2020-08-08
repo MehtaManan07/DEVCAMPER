@@ -4,6 +4,7 @@ const colors = require("colors");
 const path = require('path');
 const fileupload = require('express-fileupload')
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 
 // Load env vars
 dotenv.config({ path: "./server/config/.env" });
@@ -14,6 +15,9 @@ const app = express();
 
 //body-parser
 app.use(express.json())
+
+//cookie-parser
+app.use(cookieParser())
 
 connectDB();
 

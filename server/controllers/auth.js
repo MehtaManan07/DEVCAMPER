@@ -11,9 +11,8 @@ exports.register = asyncHandler(async (req, res, next) => {
 
   // Create a user
   const user = await User.create({ name, email, password, role });
-  //create token;
-  const token = user.getSignedJwtToken()
-  res.status(201).json({ success: true, token })
+
+  sendTokenResponse(user,200,res)
 });
 
 // @desc      Login user
@@ -38,7 +37,18 @@ exports.login = asyncHandler(async (req, res, next) => {
 
   if(!isMatch) return next(new ErrorResponse('Invalid credentials',401))
 
-  //create token;
-  const token = user.getSignedJwtToken()
-  res.status(200).json({ success: true, token })
+  sendTokenResponse(user,200,res)
 });
+
+// get token from model, create cookie and send res;
+const sendTokenResponse = (user,statusCode,res) => {
+   // create token;
+   const token = user.getSignedJwtToken();
+
+   const options = {
+     expires: new Date(Date.now() + 30*24*3600*1000),
+     httpOnly: true
+   }
+   console.log(options.expires)
+   res.status(statusCode).cookie('token',token,options).json({ success: true, token })
+}
