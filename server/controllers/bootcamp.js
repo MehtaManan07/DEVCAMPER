@@ -122,7 +122,6 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Please upload a file`, 400));
   }
   const file = req.files.file;
-  console.log(file)
   // Make sure it's a photo
   if (!file.mimetype.startsWith("image")) {
     return next(new ErrorResponse(`Make sure it is an image`, 400));

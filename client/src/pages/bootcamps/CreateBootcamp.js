@@ -29,7 +29,6 @@ const CreateBootcamp = () => {
     let careerss = [];
     tempCareers.map((val) => careerss.push(val.value));
     setValues({ ...values, careers: careerss });
-    console.log(values);
     await dispatch(createBootcamp(values));
     error === {} && history.push("/");
   };

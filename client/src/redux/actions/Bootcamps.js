@@ -36,12 +36,10 @@ export const getBootcamps = (price,career) => async (dispatch) => {
     }
     
     if(!price && career){
-      console.log('reached')
       url = `/api/v1/bootcamps?careers[in]=${career}`
     }
 
     const bootcamps = await axios.get(url);
-    console.log(bootcamps);
     dispatch({ type: GET_BOOTCAMPS_SUCCESS, payload: bootcamps.data.data });
   } catch (error) {
     console.log(error);
@@ -53,7 +51,6 @@ export const getBootcamp = (id) => async (dispatch) => {
   dispatch({ type: GET_BOOTCAMP_REQUEST });
   try {
     const bootcamp = await axios.get(`/api/v1/bootcamps/${id}`);
-    console.log(bootcamp);
     dispatch({ type: GET_BOOTCAMP_SUCCESS, payload: bootcamp.data.data });
   } catch (error) {
     console.log(error);
@@ -68,7 +65,6 @@ export const getBootcampsInRadius = (zipcode, distance) => async (dispatch) => {
     const bootcamps = await axios.get(
       `/api/v1/bootcamps/radius/${zipcode}/${distance}`
     );
-    console.log(bootcamps);
     dispatch({ type: GET_BOOTCAMPS_RAD_SUCCESS, payload: bootcamps.data.data });
   } catch (error) {
     console.log(error.response.data);
@@ -83,7 +79,6 @@ export const createBootcamp = (data) => async (dispatch) => {
     const bootcamps = await axios.post(`/api/v1/bootcamps`, data, {
       headers: { "Content-Type": "application/json" },
     });
-    console.log(bootcamps);
     dispatch({ type: CREATE_BOOTCAMP_SUCCESS, payload: bootcamps.data.data });
   } catch (error) {
     const displayErr = error.response.data.error.split(",");
@@ -97,7 +92,6 @@ export const updateBootcamp = (data, id) => async (dispatch) => {
     const bootcamp = await axios.put(`/api/v1/bootcamps/${id}`, data, {
       headers: { "Content-Type": "application/json" },
     });
-    console.log(bootcamp);
     dispatch({ type: UPDATE_BOOTCAMP_SUCCESS, payload: bootcamp.data.data });
   } catch (error) {
     const displayErr = error.response.data.error.split(",");
@@ -109,7 +103,6 @@ export const removeBootcamp = (id) => async (dispatch) => {
   dispatch({ type: REMOVE_BOOTCAMP_REQUEST });
   try {
     const bootcamp = await axios.delete(`/api/v1/bootcamps/${id}`);
-    console.log(bootcamp);
     dispatch({ type: REMOVE_BOOTCAMP_SUCCESS, payload: id });
   } catch (error) {
     const displayErr = error.response.data.error
@@ -123,7 +116,6 @@ export const uploadImage = (id,image) => async (dispatch) => {
     const bootcamp = await axios.put(`/api/v1/bootcamps/${id}/photo`,image, {
       headers: { 'Content-Type': 'multipart/form-data' }
     });
-    console.log(bootcamp);
     dispatch({ type: UPLOAD_IMAGE_SUCCESS, payload: bootcamp.data.data });
   } catch (error) {
     const displayErr = error.response.data.error;

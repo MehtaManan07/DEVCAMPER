@@ -19,7 +19,6 @@ const AddCourse = () => {
   const history = useHistory();
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(values)
     dispatch(addCourse(id,values))
     setValues({ ...values, 
       title: "",

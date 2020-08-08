@@ -28,7 +28,6 @@ const Register = () => {
     }
     await dispatch(registerUser(values));
   };
-  console.log(user.isAuth)
   if (user.isAuth) {
     return <Redirect to="/login" />;
   }

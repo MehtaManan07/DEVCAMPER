@@ -26,7 +26,6 @@ const ManageBootcamp = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", image);
-    console.log(typeof formData);
     await dispatch(uploadImage(id, formData));
     await setFileName("");
     await dispatch(getBootcamp(id));

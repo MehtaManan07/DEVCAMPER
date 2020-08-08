@@ -9,7 +9,6 @@ const UpdateBootcamp = () => {
   const { id } = useParams();
   const listBootcamps = useSelector((state) => state.listBootcamps);
   const { loading, error, bootcamp } = listBootcamps;
-  console.log(bootcamp);
   const [values, setValues] = useState({
     name: "",
     address: "",
