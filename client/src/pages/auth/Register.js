@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { useHistory, Redirect } from 'react-router-dom'
-import {Alert} from 'react-bootstrap'
-import { registerUser } from '../../redux/actions/Users'
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory, Redirect } from "react-router-dom";
+import { Alert } from "react-bootstrap";
+import { registerUser } from "../../redux/actions/Users";
 
 const Register = () => {
-  const user = useSelector(state => state.user)
-  const history = useHistory()
-  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user);
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -25,10 +25,10 @@ const Register = () => {
       alert("Passwords didn't match!!");
       return;
     }
-    await dispatch(registerUser(values))
+    await dispatch(registerUser(values));
   };
-  if(user.token !== ""){
-    return <Redirect to="/login" />
+  if (user.token !== "") {
+    return <Redirect to="/login" />;
   }
 
   return (
@@ -38,7 +38,9 @@ const Register = () => {
           <div className="col-md-6 m-auto">
             <div className="card bg-white p-4 mb-4">
               <div className="card-body">
-              {user.error.length > 0 && <Alert variant="danger"> {user.error[0]} </Alert>}
+                {user.error.length > 0 && (
+                  <Alert variant="danger"> {user.error[0]} </Alert>
+                )}
                 <h1>
                   <i className="fas fa-user-plus"></i> Register
                 </h1>

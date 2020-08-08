@@ -3,6 +3,7 @@ import {
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAILURE,
 } from "../types";
+
 const initialState = {
   user: {},
   token: "",
