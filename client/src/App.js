@@ -10,6 +10,7 @@ import UpdateBootcamp from './pages/bootcamps/UpdateBootcamp';
 import ManageBootcamp from './pages/bootcamps/ManageBootcamp';
 import ManageCourses from './pages/courses/ManageCourses';
 import Register from './pages/auth/Register';
+import Login from './pages/auth/Login';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Switch>
       <Route exact path="/" component={Landing} />
       <Route exact path="/register" component={Register} />
+      <Route exact path="/login" component={Login} />
       <Route exact path="/bootcamp/:name/:id" component={Bootcamp} />
       <Route path="/all/bootcamps" component={AllBootcamps} exact />
       <Route path="/new/bootcamp" component={CreateBootcamp} exact />
