@@ -43,17 +43,17 @@ const NavbarComponent = () => {
           <i class="fas fa-user"></i> Account
         </a>
         <div class="dropdown-menu">
-          <Link class="dropdown-item" href="manage-bootcamp.html">
-            Manage Bootcamp
+          <Link class="dropdown-item" to="/manage-bootcamp">
+            Manage Bootcamps
           </Link>
-          <Link class="dropdown-item" href="manage-reviews.html">
+          <Link class="dropdown-item" to="/manage-reviews">
             Manage Reviews
           </Link>
-          <Link class="dropdown-item" href="manage-account.html">
+          <Link class="dropdown-item" to="/manage-account">
             Manage Account
           </Link>
           <div class="dropdown-divider"></div>
-          <Link class="dropdown-item" href="login.html">
+          <Link class="dropdown-item" to="/login">
             <i class="fas fa-sign-out-alt"></i> Logout
           </Link>
         </div>
