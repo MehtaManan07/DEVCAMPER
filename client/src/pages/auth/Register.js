@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Register = () => {
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    role: "",
+  });
+  const onChangeHandler = (name) => (e) => {
+    setValues({ ...values, [name]: e.target.value });
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (values.password !== values.confirmPassword) {
+      alert("Passwords didn't match!!");
+      return;
+    }
+    
+  };
+
   return (
     <section className="form mt-5">
       <div className="container">
@@ -17,29 +37,33 @@ const Register = () => {
                 </p>
                 <form>
                   <div className="form-group">
-                    <label for="name">Name</label>
+                    <label htmlFor="name">Name</label>
                     <input
                       type="text"
-                      name="name"
+                      value={values.name}
+                      onChange={onChangeHandler("name")}
                       className="form-control"
                       placeholder="Enter full name"
                       required
                     />
                   </div>
                   <div className="form-group">
-                    <label for="email">Email Address</label>
+                    <label htmlFor="email">Email Address</label>
                     <input
                       type="email"
-                      name="email"
+                      value={values.email}
+                      onChange={onChangeHandler("email")}
                       className="form-control"
                       placeholder="Enter email"
                       required
                     />
                   </div>
                   <div className="form-group">
-                    <label for="password">Password</label>
+                    <label htmlFor="password">Password</label>
                     <input
                       type="password"
+                      value={values.password}
+                      onChange={onChangeHandler("password")}
                       name="password"
                       className="form-control"
                       placeholder="Enter password"
@@ -47,10 +71,11 @@ const Register = () => {
                     />
                   </div>
                   <div className="form-group mb-4">
-                    <label for="password2">Confirm Password</label>
+                    <label htmlFor="password2">Confirm Password</label>
                     <input
                       type="password"
-                      name="password2"
+                      value={values.confirmPassword}
+                      onChange={onChangeHandler("confirmPassword")}
                       className="form-control"
                       placeholder="Confirm password"
                       required
@@ -64,8 +89,9 @@ const Register = () => {
                         className="form-check-input"
                         type="radio"
                         name="role"
-                        value="user"
-                        checked
+                        value="User"
+                        checked={values.role === "User"}
+                        onChange={onChangeHandler("role")}
                       />
                       <label className="form-check-label">
                         Regular User (Browse, Write reviews, etc)
@@ -76,7 +102,9 @@ const Register = () => {
                         className="form-check-input"
                         type="radio"
                         name="role"
-                        value="publisher"
+                        checked={values.role === "Publisher"}
+                        value="Publisher"
+                        onChange={onChangeHandler("role")}
                       />
                       <label className="form-check-label">
                         Bootcamp Publisher
@@ -88,11 +116,13 @@ const Register = () => {
                     order to add it to DevCamper.
                   </p>
                   <div className="form-group">
-                    <input
-                      type="submit"
-                      value="Register"
+                    <button
+                      onClick={submitHandler}
                       className="btn btn-primary btn-block"
-                    />
+                    >
+                      {" "}
+                      Register{" "}
+                    </button>
                   </div>
                 </form>
               </div>
