@@ -14,6 +14,7 @@ import Login from "./pages/auth/Login";
 import store from "./redux/store";
 import { fetchUser } from "./redux/actions/Users";
 import UpdateCourse from "./pages/courses/UpdateCourse";
+import PrivateRoute from "./components/core/PrivateRoute";
 
 function App() {
   useEffect(() => {
@@ -30,12 +31,12 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/bootcamp/:name/:id" component={Bootcamp} />
         <Route path="/all/bootcamps" component={AllBootcamps} exact />
-        <Route path="/new/bootcamp" component={CreateBootcamp} exact />
-        <Route path="/manage/courses/:id" component={ManageCourses} exact />
-        <Route path="/manage/bootcamp/:id" component={ManageBootcamp} exact />
-        <Route path="/update/bootcamp/:id" component={UpdateBootcamp} exact />
-        <Route path="/update/course/:id" component={UpdateCourse} exact />
-        <Route path="/new/course/:id" component={AddCourse} exact />
+        <PrivateRoute path="/new/bootcamp" component={CreateBootcamp} exact />
+        <PrivateRoute path="/manage/courses/:id" component={ManageCourses} exact />
+        <PrivateRoute path="/manage/bootcamp/:id" component={ManageBootcamp} exact />
+        <PrivateRoute path="/update/bootcamp/:id" component={UpdateBootcamp} exact />
+        <PrivateRoute path="/update/course/:id" component={UpdateCourse} exact />
+        <PrivateRoute path="/new/course/:id" component={AddCourse} exact />
       </Switch>
     </div>
   );

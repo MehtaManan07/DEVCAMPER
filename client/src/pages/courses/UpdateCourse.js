@@ -37,6 +37,7 @@ const UpdateCourse = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(updateCourse(id, values));
+    error.length <= 0 && history.push(`/manage/bootcamp/${course.bootcamp._id}`)
   };
 
   return (
@@ -54,6 +55,7 @@ const UpdateCourse = () => {
               </span>
               {/* <h1 className="mb-2">{state && state.name}</h1> */}
               <h3 className="text-primary mb-4">Add Course</h3>
+              {error.length > 0 && <Alert variant="danger"> {error} </Alert>}
               <CourseForm
                 values={values}
                 onSubmitHandler={onSubmitHandler}
