@@ -50,7 +50,6 @@ exports.getBootcampById = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`Bootcamp not found with id ${req.params.id}`, 404)
     );
   }
-
   res.status(200).json({
     success: true,
     data: bootcamp,
@@ -140,6 +139,11 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`Bootcamp not found with id: ${req.params.id}`, 400)
     );
   }
+    // make sure if user is owner of bootcamp
+    if (bootcamp.user.toString() !== req.user.id && req.user.role !== "Admin") {
+      return next(new ErrorResponse(`Unauthorized to perform this action`, 400));
+    }
+  
   if (!req.files) {
     return next(new ErrorResponse(`Please upload a file`, 400));
   }
