@@ -11,6 +11,17 @@ const geocoder = require("../utils/geocoder");
 // @access    Private
 
 exports.createBootcamp = asyncHandler(async (req, res, next) => {
+  // Add user to body
+  req.body.user = req.user.id
+
+  const publishedBootcamp = await Bootcamp.findOne({ user: req.user.id })
+
+  // if not admin, can only add one bootcamp;
+
+  if(publishedBootcamp && req.user.role !== "Admin") {
+    return next(new ErrorResponse('User has already published a bootcamp',400))
+  }
+
   const newBootcamp = await Bootcamp.create(req.body);
   res.status(201).json({
     success: true,

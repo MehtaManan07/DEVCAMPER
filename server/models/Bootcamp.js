@@ -105,7 +105,12 @@ const BootCampSchema = new schema(
     pic: {
       type: Buffer,
       contentType: String
-    }
+    },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     toJSON: { virtuals: true },
