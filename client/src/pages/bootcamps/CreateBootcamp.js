@@ -37,7 +37,6 @@ const CreateBootcamp = () => {
   return (
     <section className="container mt-5">
       <h1 className="mb-2">Add Bootcamp</h1>
-      {JSON.stringify(error.length)}
       <p>
         Important: You must be affiliated with a bootcamp to add to DevCamper
       </p>

@@ -7,6 +7,7 @@ import BootcampCourse from "../../components/bootcamp/BootcampCourse";
 
 const Bootcamp = () => {
   const listBootcamps = useSelector((state) => state.listBootcamps);
+  const user = useSelector(state => state.user)
   const { bootcamp, loading, error } = listBootcamps;
   const { id } = useParams();
   const tick = "fas fa-check text-success";
@@ -65,7 +66,8 @@ const Bootcamp = () => {
               >
                 <i className="fas fa-globe"></i> Visit Website
               </a>
-              <Link className="btn btn-success btn-block my-3" to={`/manage/bootcamp/${bootcamp._id}`}> Manage Bootcamp </Link>
+              { bootcamp.user._id === user.user._id && 
+              <Link className="btn btn-success btn-block my-3" to={`/manage/bootcamp/${bootcamp._id}`}> Manage Bootcamp </Link> }
               {/* <!-- Perks --> */}
               <ul className="list-group list-group-flush mt-1">
                 <li className="list-group-item">
