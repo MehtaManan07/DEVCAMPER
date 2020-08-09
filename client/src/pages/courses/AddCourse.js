@@ -5,18 +5,18 @@ import { addCourse } from '../../redux/actions/Courses'
 import CourseForm from '../../components/courses/CourseForm'
 
 const AddCourse = () => {
-  const [values, setValues] = useState({
-    title: "",
-    minimumSkill: "",
-    tuition: "",
-    weeks: 0,
-    scholarhipsAvailable: false,
-    description: "",
-  });
-  const { id } = useParams();
-  const dispatch = useDispatch();
-  const { state } = useLocation();
-  const history = useHistory();
+const [values, setValues] = useState({
+  title: "",
+  minimumSkill: "",
+  tuition: "",
+  weeks: 0,
+  scholarhipsAvailable: false,
+  description: "",
+});
+const { id } = useParams();
+const dispatch = useDispatch();
+const { state } = useLocation();
+const history = useHistory();
   const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(addCourse(id,values))

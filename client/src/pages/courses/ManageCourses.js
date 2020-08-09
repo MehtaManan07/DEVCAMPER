@@ -61,7 +61,7 @@ const ManageCourses = () => {
                         <tr key={course._id}>
                           <td>{course.title}</td>
                           <td>
-                            <Link to="/" className="btn btn-secondary">
+                            <Link to={`/update/course/${course._id}`} className="btn btn-secondary">
                               <i className="fas fa-pencil-alt"></i>
                             </Link>
                             <button

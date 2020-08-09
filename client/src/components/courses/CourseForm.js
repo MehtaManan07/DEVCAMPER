@@ -54,7 +54,7 @@ const CourseForm = ({ values, onSubmitHandler, setValues }) => {
       <div className="form-group">
         <label>Minimum Skill Required</label>
         <Select
-          value={values.minimumSkill}
+          value={values.minimumSkill.value}
           options={options}
           components={animatedComponents}
           onChange={(opt) => setValues({ ...values, minimumSkill: opt.value })}
