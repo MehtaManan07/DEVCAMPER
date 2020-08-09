@@ -1,8 +1,8 @@
 const Bootcamp = require("../models/Bootcamp");
 const ErrorResponse = require("../utils/errorRes");
-const path = require("path")
-const fs = require('fs');
-const formidable = require('formidable');
+const path = require("path");
+const fs = require("fs");
+const formidable = require("formidable");
 const asyncHandler = require("../middlewares/async");
 const geocoder = require("../utils/geocoder");
 
@@ -12,14 +12,16 @@ const geocoder = require("../utils/geocoder");
 
 exports.createBootcamp = asyncHandler(async (req, res, next) => {
   // Add user to body
-  req.body.user = req.user.id
+  req.body.user = req.user.id;
 
-  const publishedBootcamp = await Bootcamp.findOne({ user: req.user.id })
+  const publishedBootcamp = await Bootcamp.findOne({ user: req.user.id });
 
   // if not admin, can only add one bootcamp;
 
-  if(publishedBootcamp && req.user.role !== "Admin") {
-    return next(new ErrorResponse('User has already published a bootcamp',400))
+  if (publishedBootcamp && req.user.role !== "Admin") {
+    return next(
+      new ErrorResponse("User has already published a bootcamp", 400)
+    );
   }
 
   const newBootcamp = await Bootcamp.create(req.body);
@@ -34,7 +36,6 @@ exports.createBootcamp = asyncHandler(async (req, res, next) => {
 // @access    Public
 
 exports.getAllBootcamps = asyncHandler(async (req, res, next) => {
- 
   res.status(200).json(res.advancedResults);
 });
 
@@ -43,7 +44,7 @@ exports.getAllBootcamps = asyncHandler(async (req, res, next) => {
 // @access    Public
 
 exports.getBootcampById = asyncHandler(async (req, res, next) => {
-  const bootcamp = await Bootcamp.findById(req.params.id).populate("courses");
+  const bootcamp = await Bootcamp.findById(req.params.id).populate("courses user");
   if (!bootcamp) {
     return next(
       new ErrorResponse(`Bootcamp not found with id ${req.params.id}`, 404)
@@ -61,15 +62,21 @@ exports.getBootcampById = asyncHandler(async (req, res, next) => {
 // @access    Private
 
 exports.updateBootcampById = asyncHandler(async (req, res, next) => {
-  const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  let bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id);
   if (!bootcamp) {
     return next(
       new ErrorResponse(`Bootcamp not found with id ${req.params.id}`, 404)
     );
   }
+  // make sure if user is owner of bootcamp
+  if (bootcamp.user.toString() !== req.user.id && req.user.role !== "Admin") {
+    return next(new ErrorResponse(`Unauthorized to perform this action`, 400));
+  }
+
+  bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
 
   res.status(200).json({
     success: true,
@@ -87,6 +94,10 @@ exports.deleteBootcampById = asyncHandler(async (req, res, next) => {
     return next(
       new ErrorResponse(`Bootcamp not found with id ${req.params.id}`, 404)
     );
+  }
+  // make sure if user is owner of bootcamp
+  if (bootcamp.user.toString() !== req.user.id && req.user.role !== "Admin") {
+    return next(new ErrorResponse(`Unauthorized to perform this action`, 400));
   }
 
   bootcamp.remove();
@@ -139,22 +150,26 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
   }
   // Check size
   if (file.size > process.env.MAX_FILE_UPLOAD) {
-    return next(new ErrorResponse(`Make sure the size is less than 1 megabytes`, 400));
+    return next(
+      new ErrorResponse(`Make sure the size is less than 1 megabytes`, 400)
+    );
   }
   // Custom file name
-  file.name = `photo_${bootcamp._id}_${new Date().getTime()}${path.parse(file.name).ext}`
-  
-  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async error => {
-    if(error) {
-      console.log(error)
+  file.name = `photo_${bootcamp._id}_${new Date().getTime()}${
+    path.parse(file.name).ext
+  }`;
+
+  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (error) => {
+    if (error) {
+      console.log(error);
       return next(new ErrorResponse(`Server error while uploading photo`, 500));
     }
 
-    await Bootcamp.findByIdAndUpdate(req.params.id,{ photo: file.name })
-    return res.status(200).json({ success: true, data: bootcamp })
-  })
+    await Bootcamp.findByIdAndUpdate(req.params.id, { photo: file.name });
+    return res.status(200).json({ success: true, data: bootcamp });
+  });
 });
 
-exports.create = asyncHandler(async (req,res) => {
-  res.json(req)
-})
+exports.create = asyncHandler(async (req, res) => {
+  res.json(req);
+});
