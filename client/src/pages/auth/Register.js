@@ -112,8 +112,8 @@ const Register = () => {
                         className="form-check-input"
                         type="radio"
                         name="role"
-                        value="User"
-                        checked={values.role === "User"}
+                        value="user"
+                        checked={values.role === "user"}
                         onChange={onChangeHandler("role")}
                       />
                       <label className="form-check-label">
@@ -125,12 +125,12 @@ const Register = () => {
                         className="form-check-input"
                         type="radio"
                         name="role"
-                        checked={values.role === "Publisher"}
-                        value="Publisher"
+                        checked={values.role === "publisher"}
+                        value="publisher"
                         onChange={onChangeHandler("role")}
                       />
                       <label className="form-check-label">
-                        Bootcamp Publisher
+                        Bootcamp publisher
                       </label>
                     </div>
                   </div>
