@@ -52,6 +52,9 @@ const NavbarComponent = () => {
           <Link class="dropdown-item" to="/manage-account">
             Manage Account
           </Link>
+          <Link class="dropdown-item" to="/new/bootcamp">
+            Add bootcamp
+          </Link>
           <div class="dropdown-divider"></div>
           <Link class="dropdown-item" to="/login">
             <i class="fas fa-sign-out-alt"></i> Logout

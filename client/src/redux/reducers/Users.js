@@ -21,7 +21,7 @@ export const userReducer = (state = initialState, { type, payload }) => {
     case USER_REGISTER_REQUEST:
     case USER_LOGIN_REQUEST:
     case LOAD_USER_REQUEST:
-      return { ...state, loading: true, isAuth: false };
+      return { ...state, loading: true };
     case USER_REGISTER_SUCCESS:
     case USER_LOGIN_SUCCESS:
       localStorage.setItem("DevCamper", true);

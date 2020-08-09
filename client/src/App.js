@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import { fetchUser } from "./redux/actions/Users";
 import NavbarComponent from "./components/core/Navbar";
 import Landing from "./pages/core/Landing";
 import AllBootcamps from "./pages/bootcamps/AllBootcamps";
@@ -12,7 +13,6 @@ import ManageCourses from "./pages/courses/ManageCourses";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import store from "./redux/store";
-import { fetchUser } from "./redux/actions/Users";
 import UpdateCourse from "./pages/courses/UpdateCourse";
 import PrivateRoute from "./components/core/PrivateRoute";
 
