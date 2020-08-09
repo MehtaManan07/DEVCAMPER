@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import Loader from "../core/Spinner";
@@ -10,15 +11,16 @@ const BootcampForm = ({
   setValues,
   onSubmitHandler,
   setTempCareers,
-  id
+  id,
 }) => {
- const options = [
+  const options = [
     { value: "Web Development", label: "Web Development" },
     { value: "Mobile Development", label: "Mobile Development" },
     { value: "Business", label: "Business" },
     { value: "Data Science", label: "Data Science" },
     { value: "UI/UX", label: "UI/UX" },
   ];
+  const history = useHistory();
 
   const { housing, jobAssistance, jobGuarantee, acceptGi } = values;
   const onChangeHandler = (name) => (e) => {
@@ -27,7 +29,7 @@ const BootcampForm = ({
   const animatedComponents = makeAnimated();
   return (
     <div>
-      {!loading  ? (
+      {!loading ? (
         <form onSubmit={onSubmitHandler}>
           <div className="row">
             <div className="col-md-6">
@@ -192,7 +194,13 @@ const BootcampForm = ({
               </Button>
             </Col>
             <Col>
-              <Button className="my-4" variant="outline-danger" block size="lg">
+              <Button
+                onClick={() => history.goBack()}
+                className="my-4"
+                variant="outline-danger"
+                block
+                size="lg"
+              >
                 Cancel
               </Button>
             </Col>

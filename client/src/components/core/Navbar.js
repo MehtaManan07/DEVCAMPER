@@ -32,32 +32,32 @@ const NavbarComponent = () => {
 
   const authLinks = (
     <>
-      <li class="nav-item dropdown">
+      <li className="nav-item dropdown">
         <a
-          class="nav-link dropdown-toggle"
+          className="nav-link dropdown-toggle"
           href="#"
           id="navbarDropdown"
           role="button"
           data-toggle="dropdown"
         >
-          <i class="fas fa-user"></i> Account
+          <i className="fas fa-user"></i> Account
         </a>
-        <div class="dropdown-menu">
-          <Link class="dropdown-item" to="/manage-bootcamp">
+        <div className="dropdown-menu">
+          <Link className="dropdown-item" to="/manage-bootcamp">
             Manage Bootcamps
           </Link>
-          <Link class="dropdown-item" to="/manage-reviews">
+          <Link className="dropdown-item" to="/manage-reviews">
             Manage Reviews
           </Link>
-          <Link class="dropdown-item" to="/manage-account">
+          <Link className="dropdown-item" to="/manage-account">
             Manage Account
           </Link>
-          <Link class="dropdown-item" to="/new/bootcamp">
+          <Link className="dropdown-item" to="/new/bootcamp">
             Add bootcamp
           </Link>
-          <div class="dropdown-divider"></div>
-          <Link class="dropdown-item" to="/login">
-            <i class="fas fa-sign-out-alt"></i> Logout
+          <div className="dropdown-divider"></div>
+          <Link className="dropdown-item" to="/login">
+            <i className="fas fa-sign-out-alt"></i> Logout
           </Link>
         </div>
       </li>

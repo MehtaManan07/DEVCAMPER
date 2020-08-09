@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { fetchUser } from "./redux/actions/Users";
 import NavbarComponent from "./components/core/Navbar";
@@ -16,12 +16,11 @@ import store from "./redux/store";
 import UpdateCourse from "./pages/courses/UpdateCourse";
 import PrivateRoute from "./components/core/PrivateRoute";
 
+if (localStorage.DevCamper) {
+  store.dispatch(fetchUser());
+}
 function App() {
-  useEffect(() => {
-    if (localStorage.DevCamper) {
-      store.dispatch(fetchUser());
-    }
-  }, []);
+
   return (
     <div>
       <NavbarComponent />

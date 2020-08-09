@@ -8,7 +8,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   <Route
     {...rest}
     render={(props) =>
-      user.isAuth ? (
+      localStorage.getItem("DevCamper") ? (
         <Component {...props} />
       ) : (
         <Redirect
