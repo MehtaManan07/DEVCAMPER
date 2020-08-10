@@ -12,6 +12,7 @@ const AllBootcamps = () => {
   const { bootcamps, loading } = listBootcamps;
   useEffect(() => {
     dispatch(getBootcamps());
+    // eslint-disable-next-line
   }, []);
   return (
     <div className="container mt-5">

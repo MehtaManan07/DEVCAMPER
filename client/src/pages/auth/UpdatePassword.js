@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updatePassword } from "../../redux/actions/Users";
 import { Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import PasswordInput from "../../components/core/PasswordInput";
 
 const UpdatePassword = () => {
   const [values, setValues] = useState({
@@ -13,10 +14,6 @@ const UpdatePassword = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.user);
-  console.log(user.error.length);
-  const onChangeHandler = (name) => (e) => {
-    setValues({ ...values, [name]: e.target.value });
-  };
   const submitHandler = async (e) => {
     e.preventDefault();
     if (values.newPassword !== values.newPassword2) {
@@ -47,33 +44,28 @@ const UpdatePassword = () => {
               <form>
                 <div className="form-group">
                   <label>Current Password</label>
-                  <input
-                    type="password"
-                    value={values.currentPassword}
-                    onChange={onChangeHandler("currentPassword")}
-                    className="form-control"
-                    placeholder="Current Password"
-                  />
+                  
+                <PasswordInput
+                  pwd="currentPassword"
+                  setValues={setValues}
+                  values={values}
+                />
                 </div>
                 <div className="form-group">
                   <label>New Password</label>
-                  <input
-                    type="password"
-                    value={values.newPassword}
-                    onChange={onChangeHandler("newPassword")}
-                    className="form-control"
-                    placeholder="New Password"
-                  />
+                <PasswordInput
+                  pwd="newPassword"
+                  setValues={setValues}
+                  values={values}
+                />
                 </div>
                 <div className="form-group">
                   <label>Confirm New Password</label>
-                  <input
-                    type="password"
-                    value={values.newPassword2}
-                    onChange={onChangeHandler("newPassword2")}
-                    className="form-control"
-                    placeholder="Confirm New Password"
-                  />
+                <PasswordInput
+                  pwd="newPassword2"
+                  setValues={setValues}
+                  values={values}
+                />
                 </div>
                 <div className="form-group">
                   <button

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import { registerUser } from "../../redux/actions/Users";
+import PasswordInput from "../../components/core/PasswordInput";
 
 const Register = () => {
   const user = useSelector((state) => state.user);
-  const history = useHistory();
   const dispatch = useDispatch();
-  const [show, setShow] = useState(false)
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -74,24 +73,11 @@ const Register = () => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Password</label>
-                    <div className="input-group">
-                    <input
-                      type={show ? "text" : "password"}
-                      value={values.password}
-                      onChange={onChangeHandler("password")}
-                      className="form-control"
-                      placeholder="Enter password"
-                      required
+                    <PasswordInput
+                      pwd="password"
+                      setValues={setValues}
+                      values={values}
                     />
-                    <div className="input-group-append">
-                        <button
-                          type="button"
-                          style={{ cursor: "pointer" }}
-                          onClick={() => setShow(!show)}
-                          className="fa fa-eye"
-                        ></button>
-                      </div>
-                    </div>
                   </div>
                   <div className="form-group mb-4">
                     <label htmlFor="password2">Confirm Password</label>

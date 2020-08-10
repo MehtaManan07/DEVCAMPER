@@ -20,6 +20,7 @@ const ManageBootcamp = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBootcamp(id));
+    // eslint-disable-next-line
   }, []);
 
   const submitHandler = async (e) => {

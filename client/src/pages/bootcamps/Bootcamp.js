@@ -15,6 +15,7 @@ const Bootcamp = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBootcamp(id));
+    // eslint-disable-next-line
   }, []);
   return (
     <section className="bootcamp mt-5">

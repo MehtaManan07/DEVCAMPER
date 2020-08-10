@@ -16,7 +16,6 @@ import {
   USER_PASSWORD_SUCCESS,
   USER_PASSWORD_FAILURE,
 } from "../types";
-import store from '../store'
 // store.getState().user.token
 
 export const fetchUser = () => async dispatch => {

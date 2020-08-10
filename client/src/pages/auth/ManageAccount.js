@@ -18,6 +18,7 @@ const ManageAccount = () => {
         name: user.user !== {} && user.user.name,
         email: user.user !== {} && user.user.email,
       });
+      // eslint-disable-next-line
   }, []);
   console.log(user.user);
   return (
