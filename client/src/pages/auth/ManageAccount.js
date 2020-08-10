@@ -66,7 +66,7 @@ const ManageAccount = () => {
                       </div>
                       <div className="col-md-6">
                         <Link
-                          to="/update/password"
+                          to={{ pathname: `/update/password`, state: user.user }}
                           className="btn btn-secondary btn-block"
                         >
                           Update Password

@@ -16,6 +16,7 @@ import ManageAccount from "./pages/auth/ManageAccount";
 import store from "./redux/store";
 import UpdateCourse from "./pages/courses/UpdateCourse";
 import PrivateRoute from "./components/core/PrivateRoute";
+import UpdatePassword from "./pages/auth/UpdatePassword";
 
 if (localStorage.DevCamper) {
   store.dispatch(fetchUser());
@@ -35,6 +36,7 @@ function App() {
         <PrivateRoute path="/manage/courses/:id" component={ManageCourses} exact />
         <PrivateRoute path="/manage/bootcamp/:id" component={ManageBootcamp} exact />
         <PrivateRoute path="/manage/account" component={ManageAccount} exact />
+        <PrivateRoute path="/update/password" component={UpdatePassword} exact />
         <PrivateRoute path="/update/bootcamp/:id" component={UpdateBootcamp} exact />
         <PrivateRoute path="/update/course/:id" component={UpdateCourse} exact />
         <PrivateRoute path="/new/course/:id" component={AddCourse} exact />
