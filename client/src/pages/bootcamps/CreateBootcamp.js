@@ -30,7 +30,7 @@ const CreateBootcamp = () => {
     tempCareers.map((val) => careerss.push(val.value));
     setValues({ ...values, careers: careerss });
     await dispatch(createBootcamp(values));
-    error === {} && history.push("/");
+    error === {} && history.push("/manage/account");
   };
 
   console.log(error,error.length)

@@ -1,5 +1,8 @@
-import React, { useState }  from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePassword } from "../../redux/actions/Users";
+import { Alert } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 const UpdatePassword = () => {
   const [values, setValues] = useState({
@@ -7,56 +10,75 @@ const UpdatePassword = () => {
     newPassword: "",
     newPassword2: "",
   });
-  const {state} = useLocation()
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const user = useSelector((state) => state.user);
+  console.log(user.error.length);
   const onChangeHandler = (name) => (e) => {
     setValues({ ...values, [name]: e.target.value });
   };
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(values);
-  }
+    if (values.newPassword !== values.newPassword2) {
+      alert("Passwords didn't match");
+      setValues({
+        ...values,
+        currentPassword: "",
+        newPassword: "",
+        newPassword2: "",
+      });
+      return;
+    }
+    await dispatch(updatePassword(values));
+    if (user.error.length === undefined) {
+      history.push("/manage/account");
+    }
+  };
   return (
-    <section class="container mt-5">
-      <div class="row">
-        <div class="col-md-8 m-auto">
-          <div class="card bg-white py-2 px-4">
-            <div class="card-body">
-              <h1 class="mb-2">Update Password</h1>
+    <section className="container mt-5">
+      <div className="row">
+        <div className="col-md-8 m-auto">
+          <div className="card bg-white py-2 px-4">
+            {user.error.length > 0 && (
+              <Alert variant="danger"> {user.error} </Alert>
+            )}
+            <div className="card-body">
+              <h1 className="mb-2">Update Password</h1>
               <form>
-                <div class="form-group">
+                <div className="form-group">
                   <label>Current Password</label>
                   <input
                     type="password"
                     value={values.currentPassword}
                     onChange={onChangeHandler("currentPassword")}
-                    class="form-control"
+                    className="form-control"
                     placeholder="Current Password"
                   />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <label>New Password</label>
                   <input
                     type="password"
                     value={values.newPassword}
                     onChange={onChangeHandler("newPassword")}
-                    class="form-control"
+                    className="form-control"
                     placeholder="New Password"
                   />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <label>Confirm New Password</label>
                   <input
                     type="password"
                     value={values.newPassword2}
                     onChange={onChangeHandler("newPassword2")}
-                    class="form-control"
+                    className="form-control"
                     placeholder="Confirm New Password"
                   />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <button
                     onClick={submitHandler}
-                    class="btn btn-outline-success btn-block"
+                    className="btn btn-outline-success btn-block"
                   >
                     Update
                   </button>

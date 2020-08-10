@@ -12,6 +12,9 @@ import {
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAILURE,
+  USER_PASSWORD_REQUEST,
+  USER_PASSWORD_SUCCESS,
+  USER_PASSWORD_FAILURE,
 } from "../types";
 import store from '../store'
 // store.getState().user.token
@@ -69,5 +72,19 @@ export const updateDetails = (data) => async (dispatch) => {
     console.log(error.response.data);
     const displayErr = error.response.data.error.split(",");
     dispatch({ type: USER_UPDATE_FAILURE, payload: displayErr });
+  }
+};
+
+export const updatePassword = (data) => async (dispatch) => {
+  dispatch({ type: USER_PASSWORD_REQUEST });
+  try {
+    const response = await axios.put(`/api/v1/auth/update/password`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+    dispatch({ type: USER_PASSWORD_SUCCESS, payload: response.data.data });
+  } catch (error) {
+    console.log(error.response.data);
+    const displayErr = error.response.data.error;
+    dispatch({ type: USER_PASSWORD_FAILURE, payload: displayErr });
   }
 };

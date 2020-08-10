@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Showcase from "../../components/Landing/Showcase";
 import { useSelector } from 'react-redux'
 import { Redirect } from "react-router-dom";
