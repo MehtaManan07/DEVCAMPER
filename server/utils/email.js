@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const sendEmail = async (options) => {
+exports.sendEmail = async (options) => {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
@@ -20,4 +20,15 @@ const sendEmail = async (options) => {
   console.log(`Message sent\n ${message}\n and the info we got is \n ${info} `);
 };
 
-module.exports = sendEmail
+exports.emailData = {
+  from: process.env.EMAIL_FROM,
+  to: req.body.email,
+  subject: `Password Reset link`,
+  html: `
+          <h1>Please use the following link to reset your password</h1>
+          <p>${process.env.CLIENT_URL}/auth/password/reset/${resetToken}</p>
+          <hr />
+          <p>This email may contain sensetive information</p>
+          <p>${process.env.CLIENT_URL}</p>
+      `,
+};
