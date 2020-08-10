@@ -9,6 +9,9 @@ import {
   LOAD_USER_FAILURE,
   LOAD_USER_SUCCESS,
   LOAD_USER_REQUEST,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAILURE,
 } from "../types";
 import store from '../store'
 // store.getState().user.token
@@ -52,5 +55,19 @@ export const loginUser = (data) => async (dispatch) => {
     console.log(error.response.data);
     const displayErr = error.response.data.error.split(",");
     dispatch({ type: USER_LOGIN_FAILURE, payload: displayErr });
+  }
+};
+
+export const updateDetails = (data) => async (dispatch) => {
+  dispatch({ type: USER_UPDATE_REQUEST });
+  try {
+    const response = await axios.put(`/api/v1/auth/update/details`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+    dispatch({ type: USER_UPDATE_SUCCESS, payload: response.data.data });
+  } catch (error) {
+    console.log(error.response.data);
+    const displayErr = error.response.data.error.split(",");
+    dispatch({ type: USER_UPDATE_FAILURE, payload: displayErr });
   }
 };

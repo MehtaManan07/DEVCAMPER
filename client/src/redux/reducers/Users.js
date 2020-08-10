@@ -7,6 +7,9 @@ import {
   USER_LOGIN_FAILURE,
   LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAILURE,
 } from "../types";
 
 const initialState = {
@@ -21,9 +24,11 @@ export const userReducer = (state = initialState, { type, payload }) => {
     case USER_REGISTER_REQUEST:
     case USER_LOGIN_REQUEST:
     case LOAD_USER_REQUEST:
+    case USER_UPDATE_REQUEST:
       return { ...state, loading: true };
     case USER_REGISTER_SUCCESS:
     case USER_LOGIN_SUCCESS:
+    case USER_UPDATE_SUCCESS:
       localStorage.setItem("DevCamper", true);
       return { ...state, isAuth: true, token: payload };
 
@@ -36,6 +41,7 @@ export const userReducer = (state = initialState, { type, payload }) => {
       };
     case USER_REGISTER_FAILURE:
     case USER_LOGIN_FAILURE:
+    case USER_UPDATE_FAILURE:
       return { ...state, error: payload, isAuth: false };
     default:
       return state;
