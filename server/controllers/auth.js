@@ -1,6 +1,11 @@
 const User = require("../models/User");
 const ErrorResponse = require("../utils/errorRes");
+const sendEmail = require("../utils/email");
 const asyncHandler = require("../middlewares/async");
+
+// Sendgrid
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // @desc      Register user
 // @route     POST /api/v1/auth/register
@@ -55,16 +60,49 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
-  if(!user) {
-    return next(new ErrorResponse(`No user found with email ${req.body.email}`,404))
+  if (!user) {
+    return next(
+      new ErrorResponse(`No user found with email ${req.body.email}`, 404)
+    );
   }
-  const resetToken = user.getresetToken()
-  console.log(resetToken)
-  await user.save({ validateBeforeSave: false })
-  res.json({
-    success: true,
-    data: user
-  })
+  const resetToken = await user.getresetToken();
+  console.log(resetToken);
+  await user.save({ validateBeforeSave: false });
+
+  // Create reset url
+  const resetUrl = `${req.protocol}://${req.get(
+    "host"
+  )}/api/v1/resetPassword/${resetToken}`;
+
+  const message = `You are receiving this email because you requested to reset a password. Please make a PUT req to" \n\n ${resetUrl}`;
+
+  const emailData = {
+    from: process.env.EMAIL_FROM,
+    to: req.body.email,
+    subject: `Password Reset link`,
+    html: `
+            <h1>Please use the following link to reset your password</h1>
+            <p>${process.env.CLIENT_URL}/auth/password/reset/${resetToken}</p>
+            <hr />
+            <p>This email may contain sensetive information</p>
+            <p>${process.env.CLIENT_URL}</p>
+        `,
+  };
+
+  try {
+    await sgMail.send(emailData)
+    res.json({
+      success: true,
+      data: user,
+      message: "Email sent",
+    });
+  } catch (error) {
+    console.log(error);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save({ validateBeforeSave: false });
+    return next(new ErrorResponse(`Email Server error`, 500));
+  }
 });
 
 // get token from model, create cookie and send res;
