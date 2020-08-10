@@ -49,7 +49,7 @@ const NavbarComponent = () => {
           <Link className="dropdown-item" to="/manage-reviews">
             Manage Reviews
           </Link>
-          <Link className="dropdown-item" to="/manage-account">
+          <Link className="dropdown-item" to="/manage/account">
             Manage Account
           </Link>
           <Link className="dropdown-item" to="/new/bootcamp">

@@ -12,6 +12,7 @@ import ManageBootcamp from "./pages/bootcamps/ManageBootcamp";
 import ManageCourses from "./pages/courses/ManageCourses";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
+import ManageAccount from "./pages/auth/ManageAccount";
 import store from "./redux/store";
 import UpdateCourse from "./pages/courses/UpdateCourse";
 import PrivateRoute from "./components/core/PrivateRoute";
@@ -33,6 +34,7 @@ function App() {
         <PrivateRoute path="/new/bootcamp" component={CreateBootcamp} exact />
         <PrivateRoute path="/manage/courses/:id" component={ManageCourses} exact />
         <PrivateRoute path="/manage/bootcamp/:id" component={ManageBootcamp} exact />
+        <PrivateRoute path="/manage/account" component={ManageAccount} exact />
         <PrivateRoute path="/update/bootcamp/:id" component={UpdateBootcamp} exact />
         <PrivateRoute path="/update/course/:id" component={UpdateCourse} exact />
         <PrivateRoute path="/new/course/:id" component={AddCourse} exact />
