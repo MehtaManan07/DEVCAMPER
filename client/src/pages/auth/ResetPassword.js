@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { forgotPassword } from '../../redux/actions/Users'
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('')
   const dispatch = useDispatch()
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch()
+    dispatch(forgotPassword(email))
 }
   return (
     <>

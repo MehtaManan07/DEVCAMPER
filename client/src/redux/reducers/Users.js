@@ -13,6 +13,9 @@ import {
   USER_PASSWORD_REQUEST,
   USER_PASSWORD_SUCCESS,
   USER_PASSWORD_FAILURE,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_FAILURE,
+  FORGOT_PASSWORD_SUCCESS,
 } from "../types";
 
 const initialState = {
@@ -29,9 +32,11 @@ export const userReducer = (state = initialState, { type, payload }) => {
     case LOAD_USER_REQUEST:
     case USER_UPDATE_REQUEST:
     case USER_PASSWORD_REQUEST:
-      return { ...state, loading: true }
+    case FORGOT_PASSWORD_REQUEST:
+      return { ...state, loading: true };
     case USER_REGISTER_SUCCESS:
     case USER_LOGIN_SUCCESS:
+    case FORGOT_PASSWORD_SUCCESS:
       localStorage.setItem("DevCamper", true);
       return { ...state, isAuth: true, token: payload };
 
@@ -51,6 +56,7 @@ export const userReducer = (state = initialState, { type, payload }) => {
       return { ...state, error: payload, isAuth: false };
     case USER_UPDATE_FAILURE:
     case USER_PASSWORD_FAILURE:
+    case FORGOT_PASSWORD_FAILURE:
       return { ...state, error: payload };
     default:
       return state;

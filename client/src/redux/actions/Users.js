@@ -15,6 +15,9 @@ import {
   USER_PASSWORD_REQUEST,
   USER_PASSWORD_SUCCESS,
   USER_PASSWORD_FAILURE,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAILURE,
 } from "../types";
 // store.getState().user.token
 
@@ -85,5 +88,19 @@ export const updatePassword = (data) => async (dispatch) => {
     console.log(error.response.data);
     const displayErr = error.response.data.error;
     dispatch({ type: USER_PASSWORD_FAILURE, payload: displayErr });
+  }
+};
+
+export const forgotPassword = (email) => async (dispatch) => {
+  dispatch({ type: FORGOT_PASSWORD_REQUEST });
+  try {
+    const response = await axios.post(`/api/v1/auth/forgot/password`, JSON.stringify({email}), {
+      headers: { "Content-Type": "application/json" },
+    });
+    dispatch({ type: FORGOT_PASSWORD_SUCCESS, payload: response.data.data });
+  } catch (error) {
+    console.log(error.response.data);
+    const displayErr = error.response.data.error;
+    dispatch({ type: FORGOT_PASSWORD_FAILURE, payload: displayErr });
   }
 };

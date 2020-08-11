@@ -103,6 +103,7 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
+  console.log(req.body)
   if (!user) {
     return next(
       new ErrorResponse(`No user found with email ${req.body.email}`, 404)

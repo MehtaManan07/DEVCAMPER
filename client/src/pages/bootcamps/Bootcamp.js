@@ -63,6 +63,7 @@ const Bootcamp = () => {
               <a
                 href={bootcamp.website}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-secondary btn-block my-3"
               >
                 <i className="fas fa-globe"></i> Visit Website
