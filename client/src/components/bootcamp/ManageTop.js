@@ -3,17 +3,19 @@ import { Link, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const ManageTop = ({ bootcamp }) => {
-  const user = useSelector(state => state.user)
-  console.log(user,bootcamp)
-  if( user.user._id.toString() !== bootcamp.user._id.toString()){
-    return <Redirect to={`/bootcamp/${bootcamp.slug}/${bootcamp._id}`} />
+  const picture = bootcamp.photo.startsWith("photo")
+    ? `/img/${bootcamp.photo}`
+    : bootcamp.photo;
+  const user = useSelector((state) => state.user);
+  console.log(user, bootcamp);
+  if (user.user._id.toString() !== bootcamp.user._id.toString()) {
+    return <Redirect to={`/bootcamp/${bootcamp.slug}/${bootcamp._id}`} />;
   }
   return (
     <div className="card mb-3">
       <div className="row no-gutters">
         <div className="col-md-4">
-          <img src={
-            `/img/${bootcamp.photo}`} className="card-img" alt="..." />
+          <img src={picture} className="card-img" alt="..." />
         </div>
         <div className="col-md-8">
           <div className="card-body">

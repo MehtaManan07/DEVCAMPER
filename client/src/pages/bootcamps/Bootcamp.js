@@ -7,11 +7,11 @@ import BootcampCourse from "../../components/bootcamp/BootcampCourse";
 
 const Bootcamp = () => {
   const listBootcamps = useSelector((state) => state.listBootcamps);
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
   const { bootcamp, loading, error } = listBootcamps;
   const { id } = useParams();
   const tick = "fas fa-check text-success";
-  const cross = "fas fa-times text-danger"
+  const cross = "fas fa-times text-danger";
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBootcamp(id));
@@ -42,7 +42,15 @@ const Bootcamp = () => {
             {/* <!-- Sidebar --> */}
             <div className="col-md-4">
               {/* <!-- Image --> */}
-              <img src={`/img/${bootcamp.photo}`} className="img-thumbnail" alt="" />
+              <img
+                src={
+                  bootcamp.photo.startsWith("photo")
+                    ? `/img/${bootcamp.photo}`
+                    : bootcamp.photo
+                }
+                className="img-thumbnail"
+                alt=""
+              />
               {/* <!-- Rating --> */}
               <h1 className="text-center my-4">
                 <span className="badge badge-secondary badge-success rounded-circle p-3">
@@ -68,21 +76,31 @@ const Bootcamp = () => {
               >
                 <i className="fas fa-globe"></i> Visit Website
               </a>
-              { bootcamp.user._id === user.user._id && 
-              <Link className="btn btn-success btn-block my-3" to={`/manage/bootcamp/${bootcamp._id}`}> Manage Bootcamp </Link> }
+              {bootcamp.user._id === user.user._id && (
+                <Link
+                  className="btn btn-success btn-block my-3"
+                  to={`/manage/bootcamp/${bootcamp._id}`}
+                >
+                  {" "}
+                  Manage Bootcamp{" "}
+                </Link>
+              )}
               {/* <!-- Perks --> */}
               <ul className="list-group list-group-flush mt-1">
                 <li className="list-group-item">
                   <i className={bootcamp.housing ? tick : cross}></i> Housing
                 </li>
                 <li className="list-group-item">
-                  <i className={bootcamp.jobAssistance ? tick : cross}></i> Job Assistance
+                  <i className={bootcamp.jobAssistance ? tick : cross}></i> Job
+                  Assistance
                 </li>
                 <li className="list-group-item">
-                  <i className={bootcamp.jobGuarantee ? tick : cross}></i> Job Guarantee
+                  <i className={bootcamp.jobGuarantee ? tick : cross}></i> Job
+                  Guarantee
                 </li>
                 <li className="list-group-item">
-                  <i className={bootcamp.acceptGi ? tick : cross}></i> Accepts GI Bill
+                  <i className={bootcamp.acceptGi ? tick : cross}></i> Accepts
+                  GI Bill
                 </li>
               </ul>
               {/* <!-- Map --> */}
