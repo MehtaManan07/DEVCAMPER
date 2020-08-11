@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { forgotPassword } from '../../redux/actions/Users'
+import { useDispatch, useSelector } from "react-redux";
+import { forgotPassword } from '../../redux/actions/Users';
+import { Modal, Alert, Button } from 'react-bootstrap'
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('')
+  const [show, setShow] = useState(false)
+  const user = useSelector(state => state.user)
   const dispatch = useDispatch()
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(forgotPassword(email))
+    user.error.length === undefined && setShow(true)
 }
   return (
     <>
@@ -15,6 +19,7 @@ const ResetPassword = () => {
         <div className="row">
           <div className="col-md-8 m-auto">
             <div className="card bg-white py-2 px-4">
+          {user.error.length > 0 && <Alert variant="danger"> {user.error} </Alert>}
               <div className="card-body">
                 <a href="login.html">Back to login</a>
                 <h1 className="mb-2">Reset Password</h1>
@@ -47,6 +52,20 @@ const ResetPassword = () => {
           </div>
         </div>
       </section>
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body> Email with link is sent to {email} </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShow(false)}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={() => setShow(false)}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
