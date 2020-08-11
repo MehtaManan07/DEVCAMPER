@@ -45,6 +45,7 @@ export const userReducer = (state = initialState, { type, payload }) => {
       return { ...state, isAuth: true, token: payload };
 
     case LOAD_USER_SUCCESS:
+    console.log(type,payload)
       return {
         ...state,
         isAuth: true,

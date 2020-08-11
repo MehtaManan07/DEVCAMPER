@@ -18,6 +18,7 @@ import UpdateCourse from "./pages/courses/UpdateCourse";
 import PrivateRoute from "./components/core/PrivateRoute";
 import UpdatePassword from "./pages/auth/UpdatePassword";
 import ResetPassword from "./pages/auth/ResetPassword";
+import ChangePassword from "./pages/auth/ChangePassword";
 
 if (localStorage.DevCamper) {
   store.dispatch(fetchUser());
@@ -42,6 +43,7 @@ function App() {
         <PrivateRoute path="/update/bootcamp/:id" component={UpdateBootcamp} exact />
         <PrivateRoute path="/update/course/:id" component={UpdateCourse} exact />
         <PrivateRoute path="/new/course/:id" component={AddCourse} exact />
+        <PrivateRoute path="/auth/password/reset/:token" component={ChangePassword} exact />
       </Switch>
     </div>
   );
