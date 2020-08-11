@@ -65,9 +65,9 @@ const Login = () => {
                     </button>
                   </div>
                 </form>
-                <p>
+                <p className="ml-auto">
                   Forgot Password?
-                  <Link to="/reset-password">Reset</Link>
+                  <Link to="/reset/password">Reset Password</Link>
                 </p>
               </div>
             </div>
