@@ -11,7 +11,7 @@ const ResetPassword = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(forgotPassword(email));
-    user.error.length === undefined && setShow(true);
+    user.error.length === undefined ? setShow(false) : setShow(true);
   };
   return (
     <>

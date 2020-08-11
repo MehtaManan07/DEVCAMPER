@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePassword } from "../../redux/actions/Users";
+import { changePassword } from "../../redux/actions/Users";
 import { Alert } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 import PasswordInput from "../../components/core/PasswordInput";
@@ -25,9 +25,9 @@ const ChangePassword = () => {
       });
       return;
     }
-    await dispatch(updatePassword(values));
+    await dispatch(changePassword(token,values.newPassword));
     if (user.error.length === undefined) {
-      history.push("/manage/account");
+      history.push("/login");
     }
   };
 

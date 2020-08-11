@@ -60,12 +60,11 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 // @access    Private
 
 exports.updateUser = asyncHandler(async (req, res, next) => {
-  
   const fieldsToUpdate = {
     name: req.body.name,
     email: req.body.email,
   };
-  console.log(req.user)
+  console.log(req.user);
 
   const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
     new: true,
@@ -79,22 +78,22 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
 // @access    Private
 
 exports.updatePassword = asyncHandler(async (req, res, next) => {
-  const { currentPassword, newPassword } = req.body
-  
+  const { currentPassword, newPassword } = req.body;
+
   const user = await User.findById(req.user.id).select("+password");
-  console.log(req.user,req.body)
+  console.log(req.user, req.body);
 
   //Check current password;
-    const isMatch = await user.matchPassword(currentPassword);
-  if(!isMatch) {
-    console.log(`reached broo`)
-    return next(new ErrorResponse(`Incorrect password`,401))
+  const isMatch = await user.matchPassword(currentPassword);
+  if (!isMatch) {
+    console.log(`reached broo`);
+    return next(new ErrorResponse(`Incorrect password`, 401));
   }
 
   user.password = newPassword;
   await user.save();
 
-  sendTokenResponse(user,200,res)
+  sendTokenResponse(user, 200, res);
 });
 
 // @desc      Forgot password
@@ -103,7 +102,9 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
-  console.log(req.body)
+  if (req.body.email === "") {
+    return next(new ErrorResponse(`Email cannot be empty`, 400));
+  }
   if (!user) {
     return next(
       new ErrorResponse(`No user found with email ${req.body.email}`, 404)
@@ -160,7 +161,6 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
     .createHash("sha256")
     .update(req.params.resetToken)
     .digest("hex");
-  console.log(resetPasswordToken);
   const user = await User.findOne({
     resetPasswordToken,
     resetPasswordExpire: { $gt: Date.now() },

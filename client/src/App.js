@@ -24,7 +24,6 @@ if (localStorage.DevCamper) {
   store.dispatch(fetchUser());
 }
 function App() {
-
   return (
     <div>
       <NavbarComponent />
@@ -33,17 +32,41 @@ function App() {
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/reset/password" component={ResetPassword} />
+        <Route
+          path="/auth/password/reset/:token"
+          component={ChangePassword}
+          exact
+        />
         <Route exact path="/bootcamp/:name/:id" component={Bootcamp} />
         <Route path="/all/bootcamps" component={AllBootcamps} exact />
         <PrivateRoute path="/new/bootcamp" component={CreateBootcamp} exact />
-        <PrivateRoute path="/manage/courses/:id" component={ManageCourses} exact />
-        <PrivateRoute path="/manage/bootcamp/:id" component={ManageBootcamp} exact />
+        <PrivateRoute
+          path="/manage/courses/:id"
+          component={ManageCourses}
+          exact
+        />
+        <PrivateRoute
+          path="/manage/bootcamp/:id"
+          component={ManageBootcamp}
+          exact
+        />
         <PrivateRoute path="/manage/account" component={ManageAccount} exact />
-        <PrivateRoute path="/update/password" component={UpdatePassword} exact />
-        <PrivateRoute path="/update/bootcamp/:id" component={UpdateBootcamp} exact />
-        <PrivateRoute path="/update/course/:id" component={UpdateCourse} exact />
+        <PrivateRoute
+          path="/update/password"
+          component={UpdatePassword}
+          exact
+        />
+        <PrivateRoute
+          path="/update/bootcamp/:id"
+          component={UpdateBootcamp}
+          exact
+        />
+        <PrivateRoute
+          path="/update/course/:id"
+          component={UpdateCourse}
+          exact
+        />
         <PrivateRoute path="/new/course/:id" component={AddCourse} exact />
-        <PrivateRoute path="/auth/password/reset/:token" component={ChangePassword} exact />
       </Switch>
     </div>
   );

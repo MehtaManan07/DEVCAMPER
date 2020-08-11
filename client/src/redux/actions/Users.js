@@ -18,21 +18,23 @@ import {
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_FAILURE,
+  CHANGE_PASSWORD_REQUEST,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAILURE,
 } from "../types";
 // store.getState().user.token
 
-export const fetchUser = () => async dispatch => {
-  dispatch({ type: LOAD_USER_REQUEST })
+export const fetchUser = () => async (dispatch) => {
+  dispatch({ type: LOAD_USER_REQUEST });
   try {
-    const response = await axios.get(`/api/v1/auth/getMe`)
-    dispatch({ type: LOAD_USER_SUCCESS, payload: response.data.data })
+    const response = await axios.get(`/api/v1/auth/getMe`);
+    dispatch({ type: LOAD_USER_SUCCESS, payload: response.data.data });
   } catch (error) {
     console.log(error.response.data);
-    const displayErr = error.response.data.error
+    const displayErr = error.response.data.error;
     dispatch({ type: LOAD_USER_FAILURE, payload: displayErr });
-    
   }
-}
+};
 
 export const registerUser = (data) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST });
@@ -55,7 +57,7 @@ export const loginUser = (data) => async (dispatch) => {
       headers: { "Content-Type": "application/json" },
     });
     dispatch({ type: USER_LOGIN_SUCCESS, payload: response.data.data });
-    dispatch(fetchUser())
+    dispatch(fetchUser());
   } catch (error) {
     console.log(error.response.data);
     const displayErr = error.response.data.error.split(",");
@@ -94,13 +96,35 @@ export const updatePassword = (data) => async (dispatch) => {
 export const forgotPassword = (email) => async (dispatch) => {
   dispatch({ type: FORGOT_PASSWORD_REQUEST });
   try {
-    const response = await axios.post(`/api/v1/auth/forgot/password`, JSON.stringify({email}), {
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await axios.post(
+      `/api/v1/auth/forgot/password`,
+      JSON.stringify({ email }),
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     dispatch({ type: FORGOT_PASSWORD_SUCCESS, payload: response.data.data });
   } catch (error) {
     console.log(error.response.data);
     const displayErr = error.response.data.error;
     dispatch({ type: FORGOT_PASSWORD_FAILURE, payload: displayErr });
+  }
+};
+
+export const changePassword = (resetToken, password) => async (dispatch) => {
+  dispatch({ type: CHANGE_PASSWORD_REQUEST });
+  try {
+    const response = await axios.put(
+      `/api/v1/auth/reset/password/${resetToken}`,
+      JSON.stringify({ password }),
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    dispatch({ type: CHANGE_PASSWORD_SUCCESS, payload: response.data.data });
+  } catch (error) {
+    console.log(error.response.data);
+    const displayErr = error.response.data.error;
+    dispatch({ type: CHANGE_PASSWORD_FAILURE, payload: displayErr });
   }
 };
