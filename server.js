@@ -35,6 +35,7 @@ app.use(express.static(path.join(`${__dirname}/client/src/`, "public")));
 app.use("/api/v1/bootcamps", require("./server/routes/bootcamps"));
 app.use("/api/v1/courses", require("./server/routes/courses"));
 app.use("/api/v1/auth", require("./server/routes/auth"));
+app.use("/api/v1/users", require("./server/routes/users"));
 app.use(errorHandler);
 
 const port = process.env.PORT || 5000;
