@@ -128,6 +128,23 @@ exports.getBootcampsInRadius = asyncHandler(async (req, res, next) => {
     .json({ success: true, count: bootcamps.length, data: bootcamps });
 });
 
+// @desc      Search for bootcamps
+// @route     POST /api/v1/bootcamps/search/
+// @access    Public
+
+exports.searchBootcamp = asyncHandler(async (req,res) => {
+  
+  const query = {};
+  if(req.query.search){
+    query.name = { $regex: req.query.search, $options: "i" };
+  }
+  const bootcamps = await Bootcamp.find(query)
+  
+  res.status(200).json({count: bootcamps.length, data: bootcamps})
+
+})
+
+
 // @desc      Upload photo for a bootcamp
 // @route     POST /api/v1/bootcamps/:id/photo
 // @access    Private

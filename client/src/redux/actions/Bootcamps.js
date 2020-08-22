@@ -23,20 +23,20 @@ import {
   UPLOAD_IMAGE_FAILURE,
 } from "../types";
 
-export const getBootcamps = (price,career) => async (dispatch) => {
+export const getBootcamps = (price, career) => async (dispatch) => {
   dispatch({ type: GET_BOOTCAMPS_REQUEST });
   try {
     let url = `/api/v1/bootcamps/`;
-    if(career && price){
-      url = `/api/v1/bootcamps?careers[in]=${career}&averageCost[lte]=${price}`
+    if (career && price) {
+      url = `/api/v1/bootcamps?careers[in]=${career}&averageCost[lte]=${price}`;
     }
-    
-    if(price && !career){
-      url = `/api/v1/bootcamps?averageCost[lte]=${price}`
+
+    if (price && !career) {
+      url = `/api/v1/bootcamps?averageCost[lte]=${price}`;
     }
-    
-    if(!price && career){
-      url = `/api/v1/bootcamps?careers[in]=${career}`
+
+    if (!price && career) {
+      url = `/api/v1/bootcamps?careers[in]=${career}`;
     }
 
     const bootcamps = await axios.get(url);
@@ -105,16 +105,16 @@ export const removeBootcamp = (id) => async (dispatch) => {
     const bootcamp = await axios.delete(`/api/v1/bootcamps/${id}`);
     dispatch({ type: REMOVE_BOOTCAMP_SUCCESS, payload: id });
   } catch (error) {
-    const displayErr = error.response.data.error
+    const displayErr = error.response.data.error;
     dispatch({ type: REMOVE_BOOTCAMP_FAILURE, payload: displayErr });
   }
 };
 
-export const uploadImage = (id,image) => async (dispatch) => {
+export const uploadImage = (id, image) => async (dispatch) => {
   dispatch({ type: UPLOAD_IMAGE_REQUEST });
   try {
-    const bootcamp = await axios.put(`/api/v1/bootcamps/${id}/photo`,image, {
-      headers: { 'Content-Type': 'multipart/form-data' }
+    const bootcamp = await axios.put(`/api/v1/bootcamps/${id}/photo`, image, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
     dispatch({ type: UPLOAD_IMAGE_SUCCESS, payload: bootcamp.data.data });
   } catch (error) {

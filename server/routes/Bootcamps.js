@@ -8,6 +8,7 @@ const {
   updateBootcampById,
   bootcampPhotoUpload,
   create,
+  searchBootcamp
 } = require("../controllers/bootcamp");
 
 // Include other resource routers
@@ -28,6 +29,8 @@ router
   .route("/")
   .post(protect, authorize("publisher", "Admin"), createBootcamp)
   .get(advancedResults(Bootcamp, "courses user"), getAllBootcamps);
+
+router.get("/search",searchBootcamp)
 
 router.put(
   "/:id/photo",

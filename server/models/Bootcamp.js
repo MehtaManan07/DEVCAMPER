@@ -80,7 +80,7 @@ const BootCampSchema = new schema(
     photo: {
       type: String,
       default:
-        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+        "https://cdn.pixabay.com/photo/2016/03/09/09/22/workplace-1245776__340.jpg",
     },
     housing: {
       type: Boolean,

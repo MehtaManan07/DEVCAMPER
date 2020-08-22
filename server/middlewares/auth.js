@@ -25,12 +25,15 @@ exports.protect = asyncHandler(async (req, res, next) => {
 
   try {
     // verify token;
+    console.log(token.bgBlue);
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(decoded.bgBlue);
     req.user = await User.findById(decoded.id);
     next();
   } catch (error) {
+    console.log(`reached error`);
     new ErrorResponse("Not authorized to access the resource", 401);
-    console.log(error);
+    console.log(error.message);
   }
 });
 
