@@ -38,9 +38,6 @@ const Register = () => {
           <div className="col-md-6 m-auto">
             <div className="card bg-white p-4 mb-4">
               <div className="card-body">
-                {user.error.length > 0 && (
-                  <Alert variant="danger"> {user.error[0]} </Alert>
-                )}
                 <h1>
                   <i className="fas fa-user-plus"></i> Register
                 </h1>
@@ -81,13 +78,11 @@ const Register = () => {
                   </div>
                   <div className="form-group mb-4">
                     <label htmlFor="password2">Confirm Password</label>
-                    <input
-                      type="password"
+                    <PasswordInput
+                      pwd="confirmPassword"
+                      setValues={setValues}
+                      values={values}
                       value={values.confirmPassword}
-                      onChange={onChangeHandler("confirmPassword")}
-                      className="form-control"
-                      placeholder="Confirm password"
-                      required
                     />
                   </div>
 
@@ -135,6 +130,9 @@ const Register = () => {
                   </div>
                 </form>
               </div>
+              {user.error.length > 0 && (
+                  <Alert variant="danger"> {user.error[0]} </Alert>
+                )}
             </div>
           </div>
         </div>

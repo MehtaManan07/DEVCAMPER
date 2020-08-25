@@ -1,10 +1,10 @@
 import React from "react";
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 const NavbarComponent = () => {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
   const guestLinks = (
     <>
       <li className="nav-item">
@@ -32,6 +32,11 @@ const NavbarComponent = () => {
 
   const authLinks = (
     <>
+      <li className="nav-item">
+        <Link className="nav-link" to="/all/bootcamps">
+          Browse Bootcamps
+        </Link>
+      </li>
       <li className="nav-item dropdown">
         <a
           className="nav-link dropdown-toggle"
@@ -78,7 +83,9 @@ const NavbarComponent = () => {
           <span className="navbar-toggler-icon"></span>
         </Button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">{user.isAuth ? authLinks : guestLinks}</ul>
+          <ul className="navbar-nav ml-auto">
+            {user.isAuth ? authLinks : guestLinks}
+          </ul>
         </div>
       </div>
     </nav>

@@ -57,6 +57,7 @@ export const userReducer = (state = initialState, { type, payload }) => {
         isAuth: true,
         loading: false,
         user: payload,
+        error:{}
       };
     case USER_REGISTER_FAILURE:
     case USER_LOGIN_FAILURE:

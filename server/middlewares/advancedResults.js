@@ -2,6 +2,7 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   let query;
   // copy req.quert
   const reqQuery = { ...req.query };
+  console.log("1",reqQuery)
 
   //Fields to exclude;
   const removeFields = ["select", "sort", "page", "limit"];
@@ -72,6 +73,7 @@ const advancedResults = (model, populate) => async (req, res, next) => {
     pagination,
     data: results,
   };
+  console.log(req.query)
   next();
 };
 

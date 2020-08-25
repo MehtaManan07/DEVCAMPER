@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser, updateDetails } from "../../redux/actions/Users";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const ManageAccount = () => {
+  const history = useHistory()
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [values, setValues] = useState({
@@ -60,7 +61,8 @@ const ManageAccount = () => {
                         <button
                           onClick={(e) =>{
                             e.preventDefault()
-                             dispatch(updateDetails(values))
+                             dispatch(updateDetails(values));
+                             history.push('/all/bootcamps')
                           }}
                           className="btn btn-success btn-block"
                         > Submit </button>
