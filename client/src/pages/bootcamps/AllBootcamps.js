@@ -5,6 +5,7 @@ import LocationFilter from "../../components/bootcamp/allBootcamps/LocationFilte
 import OtherFilters from "../../components/bootcamp/allBootcamps/OtherFilters";
 import SingleBootcamp from "../../components/bootcamp/allBootcamps/SingleBootcamp";
 import Loader from "../../components/core/Spinner";
+import Pagination from "../../components/bootcamp/allBootcamps/Pagination";
 
 const AllBootcamps = () => {
   const listBootcamps = useSelector((state) => state.listBootcamps);
@@ -34,35 +35,7 @@ const AllBootcamps = () => {
           ) : (
             <Loader text="Ha bhai" />
           )}
-          <nav aria-label="Page navigation example">
-            {/* <ul className="pagination">
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      Previous
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      1
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      2
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      3
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      Next
-                    </a>
-                  </li>
-                </ul> */}
-          </nav>
+          <Pagination />
         </div>
       </div>
     </div>

@@ -11,6 +11,8 @@ const OtherFilters = () => {
     ratings: "",
     price: "",
   });
+  const { career, price, ratings } = filters;
+
   const dispatch = useDispatch();
 
   const animatedComponents = makeAnimated();
@@ -34,7 +36,7 @@ const OtherFilters = () => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    dispatch(getBootcamps(filters.price, filters.career));
+    dispatch(getBootcamps(price, career));
     setFilters({ career: "", price: "" });
   };
 
@@ -78,7 +80,7 @@ const OtherFilters = () => {
           options={costOptions}
         />
       </div>
-      <Button block variant="outline-primary" onClick={onSubmitHandler}>
+      <Button className="mb-5" block variant="outline-primary" onClick={onSubmitHandler}>
         Find Bootcamps
       </Button>
     </form>

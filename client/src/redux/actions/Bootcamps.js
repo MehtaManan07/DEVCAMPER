@@ -1,4 +1,5 @@
 import axios from "axios";
+import queryString from 'query-string'
 import {
   GET_BOOTCAMPS_REQUEST,
   GET_BOOTCAMPS_SUCCESS,
@@ -23,23 +24,11 @@ import {
   UPLOAD_IMAGE_FAILURE,
 } from "../types";
 
-export const getBootcamps = (price, career) => async (dispatch) => {
+export const getBootcamps = (price,career) => async (dispatch) => {
   dispatch({ type: GET_BOOTCAMPS_REQUEST });
   try {
-    let url = `/api/v1/bootcamps/`;
-    if (career && price) {
-      url = `/api/v1/bootcamps?careers[in]=${career}&averageCost[lte]=${price}`;
-    }
-
-    if (price && !career) {
-      url = `/api/v1/bootcamps?averageCost[lte]=${price}`;
-    }
-
-    if (!price && career) {
-      url = `/api/v1/bootcamps?careers[in]=${career}`;
-    }
-
-    const bootcamps = await axios.get(url);
+    console.log(price,career)
+    const bootcamps = await axios.get(`/api/v1/bootcamps?careers[in]=${career}&averageCost[lte]=${price}`);
     dispatch({ type: GET_BOOTCAMPS_SUCCESS, payload: bootcamps.data.data });
   } catch (error) {
     console.log(error);
